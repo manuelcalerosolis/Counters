@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Personal counter</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_about">About</string>
+
+    <string name="fragment_counter">Counter only</string>
+    <string name="fragment_counter_time">Counter time</string>
+    <string name="FragmentCounter">Counter</string>
+
+    <string name="counter_stop">Counter saved at</string>
+    <string name="counter_start">Counter start at</string>
+    <string name="counter_cancel">Counter cancel.</string>
+
+    <string name="action_start">Start</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_end">End</string>
+    <string name="action_abort">Abort</string>
+
+    <string name="counter_finished">Counter finished!</string>
+    <string name="counter_aborted">Counter aborted!</string>
+    <string name="time">Time</string>
+
+    <string name="start_time_please">The timer is not started</string>
+    <string name="stop_time">The counter has been aborted</string>
+    <string name="save_counter">SAVE COUNTER</string>
+
+    <string name="counter_tab">General</string>
+    <string name="counter_time_tab">Time</string>
+    <string name="data_tab">Data</string>
+    <string name="minus_counter">MINUS</string>
+    <string name="plus_counter">PLUS</string>
+    <string name="textView">textView</string>
+    <string name="duration_counter">Duration</string>
+    <string name="fragment_counter_set">Counter set</string>
+    <string name="fragment_counter_data">Counters data</string>
+    <string name="action_settings">Settings</string>
+
+</resources>

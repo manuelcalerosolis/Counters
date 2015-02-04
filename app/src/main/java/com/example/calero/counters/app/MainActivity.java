@@ -1,39 +1,84 @@
 package com.example.calero.counters.app;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.calero.counters.app.UI.Tabs.TabListener;
+import com.example.calero.counters.app.UI.ViewPagers.ViewPagerAdapter;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity { // FragmentActivity{
+
+    private static Context context;
+//    private final ActionBar actionBar = getSupportActionBar();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
+
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), this));
+        viewPager.setOnPageChangeListener(
+                new ViewPager.SimpleOnPageChangeListener() {
+                    @Override
+                    public void onPageSelected(int position) {
+                        actionBar.setSelectedNavigationItem(position);
+                    }
+                });
+
+        TabListener tabListener = new TabListener(viewPager, actionBar);
+
+        actionBar.addTab(
+                actionBar.newTab()
+                        .setContentDescription(R.string.fragment_counter)
+                        .setIcon(R.drawable.fragment_counter_only)
+                        .setTabListener(tabListener));
+
+        actionBar.addTab(
+                actionBar.newTab()
+                        .setContentDescription(R.string.fragment_counter_time)
+                        .setIcon(R.drawable.fragment_counter_time)
+                        .setTabListener(tabListener));
+
+        actionBar.addTab(
+                actionBar.newTab()
+                        .setContentDescription(R.string.fragment_counter_set)
+                        .setIcon(R.drawable.fragment_counter_set)
+                        .setTabListener(tabListener));
+
+        actionBar.addTab(
+                actionBar.newTab()
+                        .setContentDescription(R.string.fragment_counter_data)
+                        .setIcon(R.drawable.fragment_counter_data)
+                        .setTabListener(tabListener));
+
     }
 
+    public static Context getAppContext() {
+        return MainActivity.context;
+    }
+
+    public static void showAppToast(int resourceId ){
+        Toast toast = Toast.makeText(getAppContext(), resourceId, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show( );
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
