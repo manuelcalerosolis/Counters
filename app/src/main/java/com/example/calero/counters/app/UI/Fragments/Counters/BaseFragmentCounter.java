@@ -8,9 +8,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.calero.counters.app.R;
-import com.example.calero.counters.app.UI.Fragments.FragmentBase;
+import com.example.calero.counters.app.UI.Fragments.BaseFragment;
 
-public abstract class FragmentBaseCounter extends FragmentBase {
+public abstract class BaseFragmentCounter extends BaseFragment {
 
     TextView textViewCounter;
     ImageButton imageButtonMinus;

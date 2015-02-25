@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 
 
-public class FragmentData extends Fragment {
+public class DataFragment extends Fragment {
 
     private ListView listViewData;
 

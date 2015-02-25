@@ -9,18 +9,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.calero.counters.app.R;
-import com.example.calero.counters.app.UI.Presenters.PresenterOnlyCounter;
+import com.example.calero.counters.app.UI.Presenters.OnlyCounterPresenter;
 
-public class FragmentOnlyCounter extends FragmentBaseCounter implements PresenterOnlyCounter.View {
+public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCounterPresenter.View {
 
     LinearLayout linearLayoutStop;
     TextView textViewSaveCounter;
     ImageButton imageButtonCancel;
 
-    static PresenterOnlyCounter presenterOnlyCounter = new PresenterOnlyCounter();
+    static OnlyCounterPresenter presenterOnlyCounter = new OnlyCounterPresenter();
 
-    public static FragmentOnlyCounter newInstance() {
-        FragmentOnlyCounter fragmentOnlyCounter = new FragmentOnlyCounter();
+    public static OnlyCounterFragment newInstance() {
+        OnlyCounterFragment fragmentOnlyCounter = new OnlyCounterFragment();
         fragmentOnlyCounter.setArguments(presenterOnlyCounter.getBundle());
         return fragmentOnlyCounter;
     }

@@ -2,7 +2,7 @@ package com.example.calero.counters.app.UI.Presenters;
 
 import java.util.Date;
 
-public class PresenterOnlyCounter extends PrensenterBaseCounter{
+public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
 
     private View view;
 

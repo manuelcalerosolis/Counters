@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
-import com.example.calero.counters.app.UI.Fragments.Counters.FragmentOnlyCounter;
-import com.example.calero.counters.app.UI.Fragments.FragmentData;
-import com.example.calero.counters.app.UI.Fragments.Counters.FragmentSetCounter;
-import com.example.calero.counters.app.UI.Fragments.Counters.FragmentTimeCounter;
+import com.example.calero.counters.app.UI.Fragments.Counters.OnlyCounterFragment;
+import com.example.calero.counters.app.UI.Fragments.DataFragment;
+import com.example.calero.counters.app.UI.Fragments.Counters.SetCounterFragment;
+import com.example.calero.counters.app.UI.Fragments.Counters.TimeCounterFragment;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -17,10 +17,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     Context context;
 
-    final FragmentOnlyCounter fragmentOnlyCounter = new FragmentOnlyCounter().newInstance();
-    final FragmentTimeCounter fragmentTimeCounter = new FragmentTimeCounter().newInstance();
-    final FragmentSetCounter fragmentSetCounter   = new FragmentSetCounter().newInstance();
-    final FragmentData fragmentdata               = new FragmentData();
+    final OnlyCounterFragment fragmentOnlyCounter = new OnlyCounterFragment().newInstance();
+    final TimeCounterFragment fragmentTimeCounter = new TimeCounterFragment().newInstance();
+    final SetCounterFragment fragmentSetCounter   = new SetCounterFragment().newInstance();
+    final DataFragment fragmentdata               = new DataFragment();
 
     public ViewPagerAdapter(FragmentManager fm, Context context) {
         super(fm);

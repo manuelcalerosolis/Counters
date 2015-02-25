@@ -1,12 +1,12 @@
 package com.example.calero.counters.app.UI.Presenters;
 
-import com.example.calero.counters.app.UI.Fragments.Counters.FragmentTimeCounter;
+import com.example.calero.counters.app.UI.Fragments.Counters.TimeCounterFragment;
 
-public class PresenterTimeCounter extends PrensenterBaseCounter{
+public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
 
-    FragmentTimeCounter fragmentTimeCounter;
+    TimeCounterFragment fragmentTimeCounter;
 
-    public void setFragment(FragmentTimeCounter fragment) {
+    public void setFragment(TimeCounterFragment fragment) {
         if (fragment == null) {
             throw new IllegalArgumentException("You can't set a null fragment");
         }

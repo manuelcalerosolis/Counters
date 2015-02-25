@@ -9,18 +9,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.calero.counters.app.R;
-import com.example.calero.counters.app.UI.Presenters.PresenterSetCounter;
+import com.example.calero.counters.app.UI.Presenters.SetCounterPresenter;
 
-public class FragmentSetCounter extends FragmentBaseCounter {
+public class SetCounterFragment extends BaseFragmentCounter {
 
     ImageButton imageButtonStop;
 
     EditText editTextTotal;
 
-    static PresenterSetCounter prensenterSetCounter = new PresenterSetCounter();
+    static SetCounterPresenter prensenterSetCounter = new SetCounterPresenter();
 
-    public static FragmentSetCounter newInstance() {
-        FragmentSetCounter fragmentSetCounter = new FragmentSetCounter();
+    public static SetCounterFragment newInstance() {
+        SetCounterFragment fragmentSetCounter = new SetCounterFragment();
         fragmentSetCounter.setArguments(prensenterSetCounter.getBundle());
         return fragmentSetCounter;
     }

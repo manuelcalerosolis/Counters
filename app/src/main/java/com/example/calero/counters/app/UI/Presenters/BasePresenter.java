@@ -1,4 +1,4 @@
 package com.example.calero.counters.app.UI.Presenters;
 
-public abstract class PresenterBase {
+public abstract class BasePresenter {
 }

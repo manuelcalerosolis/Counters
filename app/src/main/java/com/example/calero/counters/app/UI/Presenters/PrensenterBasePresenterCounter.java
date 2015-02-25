@@ -7,7 +7,7 @@ import com.example.calero.counters.app.Models.ModelCounter;
 import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.Utils.UtilToast;
 
-public abstract class PrensenterBaseCounter extends PresenterBase {
+public abstract class PrensenterBasePresenterCounter extends BasePresenter {
 
     private boolean booleanInit = false;
 

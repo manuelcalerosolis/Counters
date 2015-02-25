@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 import com.example.calero.counters.app.MainActivity;
 import com.example.calero.counters.app.R;
-import com.example.calero.counters.app.UI.Presenters.PresenterTimeCounter;
+import com.example.calero.counters.app.UI.Presenters.TimeCounterPresenter;
 
 import java.util.concurrent.TimeUnit;
 
-public class FragmentTimeCounter extends FragmentBaseCounter {
+public class TimeCounterFragment extends BaseFragmentCounter {
 
     TextView textViewTimer;
 
@@ -34,10 +34,10 @@ public class FragmentTimeCounter extends FragmentBaseCounter {
     long longHours      = 0;
     long longMinutes    = 1;
 
-    static PresenterTimeCounter prensenterTimeCounter = new PresenterTimeCounter();
+    static TimeCounterPresenter prensenterTimeCounter = new TimeCounterPresenter();
 
-    public static FragmentTimeCounter newInstance() {
-        FragmentTimeCounter fragmentTimeCounter = new FragmentTimeCounter();
+    public static TimeCounterFragment newInstance() {
+        TimeCounterFragment fragmentTimeCounter = new TimeCounterFragment();
         fragmentTimeCounter.setArguments(prensenterTimeCounter.getBundle());
         return fragmentTimeCounter;
     }
