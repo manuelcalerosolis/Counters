@@ -51,7 +51,7 @@ public class CountersContract {
         public static final String COLUMN_STAR = "star";
         public static final String COLUMN_STOP = "stop";
 
-        public static Uri buildLocationUri(long id) {
+        public static Uri buildCuntersUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }

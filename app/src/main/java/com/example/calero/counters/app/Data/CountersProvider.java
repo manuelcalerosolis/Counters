@@ -20,6 +20,13 @@ public class CountersProvider extends ContentProvider {
 
     private static final UriMatcher uriMatcher = buildUriMatcher();
 
+    private static final SQLiteQueryBuilder queryBuilder;
+
+    static {
+        queryBuilder = new SQLiteQueryBuilder();
+        queryBuilder.setTables(CountersEntry.TABLE_NAME);
+    }
+
     @Override
     public boolean onCreate() {
         countersDbHelper = new CountersDbHelper(getContext());
@@ -28,32 +35,21 @@ public class CountersProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-
-        // Uisng SQLiteQueryBuilder instead of query() method
-        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-
-        // Set the table
-        queryBuilder.setTables(CountersEntry.TABLE_NAME);
-
         switch (uriMatcher.match(uri)) {
-            // If the incoming URI was for all of table3
             case COUNTERS:
-
                 if (TextUtils.isEmpty(sortOrder)) sortOrder = "_ID ASC";
                 break;
 
-            // If the incoming URI was for a single row
             case COUNTERS_ID:
-
                 queryBuilder.appendWhere(CountersEntry.COLUMN_ID + "=" + uri.getLastPathSegment());
                 break;
 
-        default:
-            throw new UnsupportedOperationException("Unknown uri: " + uri);
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        SQLiteDatabase db = countersDbHelper.getWritableDatabase();
-        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+        SQLiteDatabase sqLiteDatabase = countersDbHelper.getReadableDatabase();
+        Cursor cursor = queryBuilder.query(sqLiteDatabase, projection, selection, selectionArgs, null, null, sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
         return cursor;
@@ -61,17 +57,66 @@ public class CountersProvider extends ContentProvider {
 
     @Override
     public String getType(Uri uri) {
-        return null;
+        // Use the Uri Matcher to determine what kind of URI this is.
+        final int match = uriMatcher.match(uri);
+
+        switch (match) {
+            case COUNTERS:
+                return CountersEntry.CONTENT_TYPE;
+            case COUNTERS_ID:
+                return CountersEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
     }
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        return null;
+
+        Uri returnUri;
+        long id = 0;
+        final int uriType = uriMatcher.match(uri);
+
+        switch (uriType) {
+            case COUNTERS:
+                final SQLiteDatabase sqLiteDatabase = countersDbHelper.getWritableDatabase();
+                id = sqLiteDatabase.insert(CountersEntry.TABLE_NAME, null, values);
+                if ( id > 0)
+                    returnUri = CountersEntry.buildCuntersUri(id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unknown URI: " + uri);
+        }
+
+        getContext().getContentResolver().notifyChange(uri, null);
+        return returnUri;
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
+
+        int rowsDeleted;
+        final SQLiteDatabase sqLiteDatabase = countersDbHelper.getWritableDatabase();
+        final int uriType = uriMatcher.match(uri);
+
+        if( selection == null) selection = "1";
+
+        switch (uriType) {
+            case COUNTERS:
+                rowsDeleted = sqLiteDatabase.delete(CountersEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (rowsDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsDeleted;
     }
 
     @Override
