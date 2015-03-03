@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class CountersContract {
 
-    public static final String CONTENT_AUTHORITY = "com.example.calero.counters.app.Data";
+    public static final String CONTENT_AUTHORITY = "com.example.calero.counters.app";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final String PATH_COUNTERS = "counters";
@@ -41,8 +41,6 @@ public class CountersContract {
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_COUNTERS;
 
         public static final String TABLE_NAME = "counters";
-
-        public static final String COLUMN_COUNTERS_SETTING = "counters_setting";
 
         public static final String COLUMN_ID = "_ID";
         public static final String COLUMN_NAME = "name";

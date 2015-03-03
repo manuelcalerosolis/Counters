@@ -17,14 +17,14 @@ public class CountersDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        final String SQL_CREATE_COUNTERS_TABLE = "CREATE TABLE " + CountersEntry.TABLE_NAME + " (" +
+        final String SQL_CREATE_COUNTERS_TABLE = "CREATE TABLE " + CountersEntry.TABLE_NAME +
+                " (" +
                 CountersEntry.COLUMN_ID + " INTEGER PRIMARY KEY," +
                 CountersEntry.COLUMN_NAME + " TEXT UNIQUE NOT NULL, " +
                 CountersEntry.COLUMN_COUNTED + " LONG, " +
                 CountersEntry.COLUMN_TYPE + " INTEGER, " +
                 CountersEntry.COLUMN_STAR + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
-                CountersEntry.COLUMN_STOP + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
-                "UNIQUE (" + CountersEntry.COLUMN_COUNTERS_SETTING +") ON CONFLICT IGNORE"+
+                CountersEntry.COLUMN_STOP + " DATETIME DEFAULT CURRENT_TIMESTAMP " +
                 " );";
         sqLiteDatabase.execSQL(SQL_CREATE_COUNTERS_TABLE);
     }
