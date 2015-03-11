@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.test.AndroidTestCase;
+import android.util.Log;
 
 import com.example.calero.counters.app.Data.CountersContract.CountersEntry;
 
@@ -51,6 +52,26 @@ public class TestProvider extends AndroidTestCase {
         long locationRowId = ContentUris.parseId(locationUri);
 
         assertTrue(locationRowId != -1);
+    }
+
+    public void testUpdateReadProvider() {
+        ContentValues testValues = createTestValues();
+
+        Uri locationUri = mContext.getContentResolver().insert(CountersEntry.CONTENT_URI, testValues);
+        long locationRowId = ContentUris.parseId(locationUri);
+
+        // Verify we got a row back.
+        assertTrue(locationRowId != -1);
+        Log.d(LOG_TAG, "New row id: " + locationRowId);
+
+        ContentValues updatedValues = new ContentValues(testValues);
+        //updatedValues.put(CountersEntry.COLUMN_ID, locationRowId);
+        updatedValues.put(CountersEntry.COLUMN_NAME,"Santa's Village");
+
+        int count = mContext.getContentResolver().update( CountersEntry.CONTENT_URI, updatedValues, CountersEntry._ID + "= ?", new String[] { Long.toString(locationRowId)});
+
+        Log.d(LOG_TAG, "Result update: " + count);
+        assertEquals(count, 1);
     }
 
     static ContentValues createTestValues() {

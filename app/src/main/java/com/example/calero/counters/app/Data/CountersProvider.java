@@ -97,7 +97,6 @@ public class CountersProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-
         int rowsDeleted;
         final SQLiteDatabase sqLiteDatabase = countersDbHelper.getWritableDatabase();
         final int uriType = uriMatcher.match(uri);
@@ -121,7 +120,25 @@ public class CountersProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+        int rowsUpdated;
+        final SQLiteDatabase sqLiteDatabase = countersDbHelper.getWritableDatabase();
+        final int uriType = uriMatcher.match(uri);
+
+        if( selection == null) selection = "1";
+
+        switch (uriType) {
+            case COUNTERS:
+                rowsUpdated = sqLiteDatabase.update(CountersEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (rowsUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsUpdated;
     }
 
     private static UriMatcher buildUriMatcher(){
