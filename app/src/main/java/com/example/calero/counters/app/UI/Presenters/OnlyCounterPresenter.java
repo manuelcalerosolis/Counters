@@ -45,7 +45,7 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
 
     public void saveCounter(){
         setBooleanInit(false);
-        getModelCounter().insertDatabase();
+        // getModelCounter().insertDatabase();
         view.hideSaveAndCancel();
         toastTimeStampSave();
     }
