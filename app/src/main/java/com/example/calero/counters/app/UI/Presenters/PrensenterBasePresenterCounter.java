@@ -11,7 +11,7 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
 
     private boolean booleanInit = false;
 
-    private ModelCounter modelCounter = new ModelCounter(getCounterType());
+    private final ModelCounter modelCounter = new ModelCounter(getCounterType());
 
     public ModelCounter getModelCounter() {
         return modelCounter;

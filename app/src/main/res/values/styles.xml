@@ -10,4 +10,34 @@
         <item name="android:minHeight">280dip</item>
     </style>
 
+    <style name="PlusMinusStyle">
+        <item name="android:layout_width">?attr/actionBarSize</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_margin">@dimen/spacing_large</item>
+        <item name="android:background">@drawable/button_plus_background</item>
+        <item name="android:src">@drawable/minus_counter_icon</item>
+        <item name="android:outlineProvider">background</item>
+        <item name="android:stateListAnimator">@anim/fab_elevation</item>
+    </style>
+
+    <style name="PlusButtonStyle">
+        <item name="android:layout_width">?attr/actionBarSize</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_margin">@dimen/spacing_large</item>
+        <item name="android:background">@drawable/button_plus_background</item>
+        <item name="android:src">@drawable/ic_add_black</item>
+        <item name="android:outlineProvider">background</item>
+        <item name="android:stateListAnimator">@anim/fab_elevation</item>
+    </style>
+
+    <color name="primary">#00BCD4</color>
+    <color name="primary_dark">#0097A7</color>
+    <color name="accent">#659700</color>
+    <color name="accent_translucent">#659700</color>
+    <color name="accent_bright">#659700</color>
+    <color name="primary_blue">#2196F3</color>
+    <color name="primary_blue_bright">#1E88E5</color>
+    <color name="primary_pink">#E91E63</color>
+    <color name="primary_pink_bright">#D81B60</color>
+
 </resources>

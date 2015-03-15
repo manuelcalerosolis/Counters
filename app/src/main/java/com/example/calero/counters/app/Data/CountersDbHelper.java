@@ -8,7 +8,7 @@ import com.example.calero.counters.app.Data.CountersContract.CountersEntry;
 
 public class CountersDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "counters.db";
 
     public CountersDbHelper(Context context) {
@@ -20,7 +20,7 @@ public class CountersDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_COUNTERS_TABLE = "CREATE TABLE " + CountersEntry.TABLE_NAME +
                 " (" +
                 CountersEntry.COLUMN_ID + " INTEGER PRIMARY KEY," +
-                CountersEntry.COLUMN_NAME + " TEXT UNIQUE NOT NULL, " +
+                CountersEntry.COLUMN_NAME + " TEXT NOT NULL, " +
                 CountersEntry.COLUMN_COUNTED + " LONG, " +
                 CountersEntry.COLUMN_TYPE + " INTEGER, " +
                 CountersEntry.COLUMN_STAR + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
