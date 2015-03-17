@@ -58,7 +58,7 @@ public class TimeCounterFragment extends BaseFragmentCounter {
         textViewTimer = (TextView) view.findViewById(R.id.textViewTimer);
         refreshTextViewTimer();
 
-        textViewCounter = (TextView) view.findViewById(R.id.textViewCounter);
+        textViewCounter = (TextView) view.findViewById(R.id.list_item_counter_textview);
 
         linearLayoutStop = (LinearLayout) view.findViewById(R.id.linearLayoutStop);
 

@@ -7,7 +7,7 @@ import android.widget.TextView;
 public class HolderData {
 
     TextView textViewCounter;
-    TextView textViewGlobal;
+    TextView textViewName;
     ImageView imageViewType;
     TextView textViewDuration;
 
@@ -16,7 +16,7 @@ public class HolderData {
     }
 
     public TextView getTextViewGlobal() {
-        return textViewGlobal;
+        return textViewName;
     }
 
     public TextView getTextViewDuration() {
@@ -33,8 +33,8 @@ public class HolderData {
 
     HolderData(View row) {
             this.imageViewType = (ImageView) row.findViewById(R.id.iconTypeCounter);
-            this.textViewCounter = (TextView) row.findViewById(R.id.textViewCounter);
-            this.textViewGlobal = (TextView) row.findViewById(R.id.textView);
-            this.textViewDuration = (TextView) row.findViewById(R.id.textViewDuration);
+            this.textViewCounter = (TextView) row.findViewById(R.id.list_item_counter_textview);
+            this.textViewName = (TextView) row.findViewById(R.id.list_item_name_textview);
+            this.textViewDuration = (TextView) row.findViewById(R.id.list_item_duration_textview);
         }
     }

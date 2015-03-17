@@ -3,6 +3,8 @@ package com.example.calero.counters.app.UI.Fragments;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,7 @@ import com.example.calero.counters.app.R;
 
 import java.util.ArrayList;
 
-
-
-public class DataFragment extends Fragment {
+public class DataFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> { {
 
     private ListView listViewData;
 
@@ -50,5 +50,19 @@ public class DataFragment extends Fragment {
 
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
 }
 

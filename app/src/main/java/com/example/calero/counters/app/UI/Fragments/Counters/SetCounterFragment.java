@@ -40,7 +40,7 @@ public class SetCounterFragment extends BaseFragmentCounter {
 
         editTextTotal           = (EditText) view.findViewById(R.id.editTextTotal);
 
-        textViewCounter         = (TextView) view.findViewById(R.id.textViewCounter);
+        textViewCounter         = (TextView) view.findViewById(R.id.list_item_counter_textview);
 
         imageButtonStop         = (ImageButton) view.findViewById(R.id.imageButtonStop);
 
