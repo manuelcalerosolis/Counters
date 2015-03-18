@@ -52,5 +52,12 @@ public class CountersContract {
         public static Uri buildCuntersUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
+
+        public static Uri buildCountersEntry() {
+            return CONTENT_URI;
+        }
+
     }
+
+
 }

@@ -27,10 +27,20 @@ public class CountersProvider extends ContentProvider {
         queryBuilder.setTables(CountersEntry.TABLE_NAME);
     }
 
+    private static UriMatcher buildUriMatcher(){
+        final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
+        final String authority = CountersContract.CONTENT_AUTHORITY;
+
+        matcher.addURI(authority, CountersContract.PATH_COUNTERS, COUNTERS);
+        matcher.addURI(authority, CountersContract.PATH_COUNTERS + "/#", COUNTERS_ID);
+
+        return matcher;
+    }
+
     @Override
     public boolean onCreate() {
         countersDbHelper = new CountersDbHelper(getContext());
-        return false;
+        return true;
     }
 
     @Override
@@ -141,14 +151,7 @@ public class CountersProvider extends ContentProvider {
         return rowsUpdated;
     }
 
-    private static UriMatcher buildUriMatcher(){
-        final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
-        final String authority = CountersContract.CONTENT_AUTHORITY;
 
-        matcher.addURI(authority, CountersContract.PATH_COUNTERS, COUNTERS);
-
-        return matcher;
-    }
 }
 
 
