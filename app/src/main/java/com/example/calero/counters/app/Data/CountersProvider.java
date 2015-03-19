@@ -114,7 +114,7 @@ public class CountersProvider extends ContentProvider {
         if( selection == null) selection = "1";
 
         switch (uriType) {
-            case COUNTERS:
+            case COUNTERS_ID:
                 rowsDeleted = sqLiteDatabase.delete(CountersEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
@@ -130,6 +130,7 @@ public class CountersProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+
         int rowsUpdated;
         final SQLiteDatabase sqLiteDatabase = countersDbHelper.getWritableDatabase();
         final int uriType = uriMatcher.match(uri);
@@ -137,7 +138,7 @@ public class CountersProvider extends ContentProvider {
         if( selection == null) selection = "1";
 
         switch (uriType) {
-            case COUNTERS:
+            case COUNTERS_ID:
                 rowsUpdated = sqLiteDatabase.update(CountersEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:

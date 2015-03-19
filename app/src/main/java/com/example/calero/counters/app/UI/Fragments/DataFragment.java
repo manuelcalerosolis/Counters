@@ -26,6 +26,24 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
     private int listViewPosition;
     private static final String SELECTED_KEY = "selected_position";
 
+    private static final String[] COUNTERS_COLUMNS = {
+            // In this case the id needs to be fully qualified with a table name, since
+            // the content provider joins the location & weather tables in the background
+            // (both have an _id column)
+            // On the one hand, that's annoying.  On the other, you can search the weather table
+            // using the location set by the user, which is only in the Location table.
+            // So the convenience is worth it.
+            CountersContract.CountersEntry.TABLE_NAME + "." + CountersContract.CountersEntry._ID,
+            WeatherContract.WeatherEntry.COLUMN_DATE,
+            WeatherContract.WeatherEntry.COLUMN_SHORT_DESC,
+            WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
+            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
+            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
+            WeatherContract.LocationEntry.COLUMN_COORD_LAT,
+            WeatherContract.LocationEntry.COLUMN_COORD_LONG
+    };
+
     private CountersAdapter countersAdapter;
     private ListView listViewData;
 
@@ -76,16 +94,13 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
 
         String sortOrder = CountersContract.CountersEntry.COLUMN_STAR + " ASC";
 
-        String locationSetting = Utility.getPreferredLocation(getActivity());
-        Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
-                locationSetting, System.currentTimeMillis());
-
-        return new CursorLoader(getActivity(),
-                weatherForLocationUri,
-                FORECAST_COLUMNS,
+        return new CursorLoader( getActivity(),
+                CountersContract.CountersEntry.CONTENT_URI,
                 null,
                 null,
-                sortOrder);
+                null,
+                sortOrder
+        );
 
     }
 

@@ -65,7 +65,7 @@ public class TestProvider extends AndroidTestCase {
         Log.d(LOG_TAG, "New row id: " + locationRowId);
 
         ContentValues updatedValues = new ContentValues(testValues);
-        //updatedValues.put(CountersEntry.COLUMN_ID, locationRowId);
+
         updatedValues.put(CountersEntry.COLUMN_NAME,"Santa's Village");
 
         int count = mContext.getContentResolver().update( CountersEntry.CONTENT_URI, updatedValues, CountersEntry._ID + "= ?", new String[] { Long.toString(locationRowId)});
