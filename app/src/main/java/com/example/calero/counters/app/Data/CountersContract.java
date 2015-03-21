@@ -42,7 +42,7 @@ public class CountersContract {
 
         public static final String TABLE_NAME = "counters";
 
-        public static final String COLUMN_ID = "_ID";
+        public static final String COLUMN_ID = "_id";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_COUNTED = "counted";
         public static final String COLUMN_TYPE = "type";
@@ -58,6 +58,5 @@ public class CountersContract {
         }
 
     }
-
 
 }

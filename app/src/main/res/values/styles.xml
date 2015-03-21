@@ -10,25 +10,26 @@
         <item name="android:minHeight">280dip</item>
     </style>
 
-    <style name="PlusMinusStyle">
-        <item name="android:layout_width">?attr/actionBarSize</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:layout_margin">@dimen/spacing_large</item>
-        <item name="android:background">@drawable/button_plus_background</item>
-        <item name="android:src">@drawable/minus_counter_icon</item>
-        <item name="android:outlineProvider">background</item>
-        <item name="android:stateListAnimator">@anim/fab_elevation</item>
-    </style>
-
-    <style name="PlusButtonStyle">
-        <item name="android:layout_width">?attr/actionBarSize</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
+    <style name="ButtonPlusStyle">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">200dp</item>
         <item name="android:layout_margin">@dimen/spacing_large</item>
         <item name="android:background">@drawable/button_plus_background</item>
         <item name="android:src">@drawable/ic_add_black</item>
         <item name="android:outlineProvider">background</item>
         <item name="android:stateListAnimator">@anim/fab_elevation</item>
     </style>
+
+    <style name="ButtonMinusStyle">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_margin">@dimen/spacing_large</item>
+        <item name="android:background">@drawable/button_minus_background</item>
+        <item name="android:src">@drawable/minus_counter_icon</item>
+        <item name="android:outlineProvider">background</item>
+        <item name="android:stateListAnimator">@anim/fab_elevation</item>
+    </style>
+
 
     <color name="primary">#00BCD4</color>
     <color name="primary_dark">#0097A7</color>

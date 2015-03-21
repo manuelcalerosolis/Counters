@@ -1,65 +1,101 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<!--<merge xmlns:android="http://schemas.android.com/apk/res/android">-->
 
-    <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
-        android:gravity="end|center_horizontal">
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="center_vertical"-->
+        <!--android:gravity="end|center_horizontal">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="0000"-->
+            <!--android:id="@+id/list_item_counter_textview"-->
+            <!--android:textSize="100dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:paddingLeft="50dp"-->
+            <!--android:paddingRight="50dp"-->
+            <!--android:textColor="@color/primary_blue"-->
+            <!--android:textIsSelectable="false"-->
+            <!--android:layout_alignBottom="@+id/imageButtonMinus"-->
+            <!--android:layout_centerHorizontal="true" />-->
 
         <!--<ImageButton-->
-            <!--android:src="@drawable/minus_counter_icon"-->
-            <!--android:id="@+id/imageButtonMinus"-->
-            <!--android:background="@null"-->
-            <!--android:layout_height="200dp"-->
             <!--android:layout_width="wrap_content"-->
-            <!--android:layout_alignTop="@+id/imageButtonPlus"-->
-            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/imageButtonMinus"-->
+            <!--android:gravity="center_vertical"-->
             <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_margin="20dp"/>-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--style="@style/ButtonMinusStyle"-->
+            <!--android:layout_margin="20dp" />-->
+
+        <!--<ImageButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/imageButtonPlus"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--style="@style/ButtonPlusStyle"-->
+            <!--android:layout_margin="20dp" />-->
+
+    <!--</RelativeLayout>-->
+
+<!--</merge>-->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:gravity="end">
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/imageButtonMinus"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            style="@style/ButtonMinusStyle"
+            android:layout_margin="10dp"
+            android:layout_weight="0"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0000"
             android:id="@+id/list_item_counter_textview"
-            android:textSize="100sp"
+            android:textSize="80dp"
             android:textStyle="bold"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:textColor="@color/primary_blue"
             android:textIsSelectable="false"
+            android:layout_gravity="center_horizontal"
             android:layout_above="@+id/imageButtonPlus"
             android:layout_centerHorizontal="true" />
 
         <ImageButton
-            android:id="@+id/imageButtonMinus"
-            android:gravity="center_vertical"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            style="@style/ButtonMinusStyle"
-            android:layout_margin="20dp" />
-
-
-        <!--<ImageButton-->
-            <!--android:src="@drawable/plus_counter_icon"-->
-            <!--android:id="@+id/imageButtonPlus"-->
-            <!--android:background="@drawable/circle_plus"-->
-            <!--android:adjustViewBounds="false"-->
-            <!--android:layout_width="200dp"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:focusableInTouchMode="false"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_margin="20dp" />-->
-
-        <ImageButton
+            style="@style/ButtonPlusStyle"
             android:id="@+id/imageButtonPlus"
             android:gravity="center_vertical"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            style="@style/ButtonPlusStyle"
-            android:layout_margin="20dp" />
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
+
+</LinearLayout>
 
 </merge>

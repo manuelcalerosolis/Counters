@@ -1,6 +1,7 @@
 package com.example.calero.counters.app.UI.Fragments.Counters;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
     TextView textViewSaveCounter;
     ImageButton imageButtonCancel;
 
+    static final String STATE_COUNTER = "onlyCounter";
+
     static OnlyCounterPresenter presenterOnlyCounter = new OnlyCounterPresenter();
 
     public static OnlyCounterFragment newInstance() {
@@ -28,10 +31,8 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            presenterOnlyCounter.setBundle(bundle);
+        if (savedInstanceState != null) {
+            presenterOnlyCounter.setBundle(savedInstanceState);
         }
     }
 
@@ -78,6 +79,21 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
         setRetainInstance(true);
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        presenterOnlyCounter.getBundle();
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null){
+            presenterOnlyCounter.setBundle(savedInstanceState);
+        }
+        refreshTextViewCounter(presenterOnlyCounter.getModelCounter().getStringCounterFormat());
     }
 
     @Override

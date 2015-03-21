@@ -46,7 +46,7 @@ public class CountersHolder {
 
     public void setTextViewDurationFromCursor(Cursor cursor) throws ParseException {
 
-        int minutes;
+        int minutes = 0;
         int columnStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
         int columnStop = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STOP);
 
@@ -59,10 +59,8 @@ public class CountersHolder {
                 SimpleDateFormat simpleDateFormatStop = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                 Date dateStop = simpleDateFormatStop.parse(cursor.getString(columnStart));
 
-                minutes = (int) (TimeUnit.MILLISECONDS.toMinutes(dateStart.getTime()));
-                minutes =-(int) (TimeUnit.MILLISECONDS.toMinutes(dateStop.getTime()));
+                minutes = (int) (TimeUnit.MILLISECONDS.toMinutes(dateStart.getTime())) - (int) (TimeUnit.MILLISECONDS.toMinutes(dateStop.getTime()));
 
-                textViewDuration.setText(minutes);
             }
         }
         catch (ParseException e)
@@ -70,6 +68,7 @@ public class CountersHolder {
             e.printStackTrace();
         }
 
+        textViewDuration.setText( String.valueOf(minutes) + " min");
     }
 
 }

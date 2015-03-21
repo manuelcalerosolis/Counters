@@ -114,7 +114,7 @@ public class CountersProvider extends ContentProvider {
         if( selection == null) selection = "1";
 
         switch (uriType) {
-            case COUNTERS_ID:
+            case COUNTERS:
                 rowsDeleted = sqLiteDatabase.delete(CountersEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
@@ -138,7 +138,7 @@ public class CountersProvider extends ContentProvider {
         if( selection == null) selection = "1";
 
         switch (uriType) {
-            case COUNTERS_ID:
+            case COUNTERS:
                 rowsUpdated = sqLiteDatabase.update(CountersEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:
@@ -151,8 +151,6 @@ public class CountersProvider extends ContentProvider {
 
         return rowsUpdated;
     }
-
-
 }
 
 

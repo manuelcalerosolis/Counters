@@ -1,0 +1,53 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+            <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imageButtonMinus"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    style="@style/ButtonMinusStyle"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0000"
+                    android:id="@+id/list_item_counter_textview"
+                    android:textSize="80dp"
+                    android:textStyle="bold"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:textColor="@color/primary_blue"
+                    android:textIsSelectable="false"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignBottom="@+id/imageButtonPlus"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonPlus"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    style="@style/ButtonPlusStyleLand"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+</merge>

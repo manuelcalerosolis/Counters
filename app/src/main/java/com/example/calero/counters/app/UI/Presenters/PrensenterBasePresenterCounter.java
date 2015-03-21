@@ -45,6 +45,10 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
         modelCounter.plusLongCounter();
     }
 
+    public long getCounter(){
+        return modelCounter.getLongCounter();
+    }
+
     public void minusCounter(){
         modelCounter.minusLongCounter();
     }
@@ -61,7 +65,7 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
         return (bundle);
     }
 
-    public void setBundle(Bundle bundle){
+    public void setBundle(Bundle bundle ){
         setBooleanInit(bundle.getBoolean("booleanInit", false));
         modelCounter.setLongCounter(bundle.getLong("longCounter", 0));
         modelCounter.setTimeStampStartSerializable(bundle.getSerializable("timeStampStart"));

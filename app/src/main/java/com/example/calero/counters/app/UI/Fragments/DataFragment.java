@@ -7,7 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,6 +19,7 @@ import android.widget.ListView;
 
 import com.example.calero.counters.app.Data.CountersAdapter;
 import com.example.calero.counters.app.Data.CountersContract;
+import com.example.calero.counters.app.MainActivity;
 import com.example.calero.counters.app.Repositories.RepositoryCounter;
 import com.example.calero.counters.app.ModelData;
 import com.example.calero.counters.app.R;
@@ -23,25 +28,18 @@ import java.util.ArrayList;
 
 public class DataFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    public static final String LOG_TAG = "COUNTERS_DATA_FRAGMENT"; // DataFragment.class.getSimpleName();
+    private static final int COUNTERS_LOADER = 0;
     private int listViewPosition;
     private static final String SELECTED_KEY = "selected_position";
 
     private static final String[] COUNTERS_COLUMNS = {
-            // In this case the id needs to be fully qualified with a table name, since
-            // the content provider joins the location & weather tables in the background
-            // (both have an _id column)
-            // On the one hand, that's annoying.  On the other, you can search the weather table
-            // using the location set by the user, which is only in the Location table.
-            // So the convenience is worth it.
-            CountersContract.CountersEntry.TABLE_NAME + "." + CountersContract.CountersEntry._ID,
-            WeatherContract.WeatherEntry.COLUMN_DATE,
-            WeatherContract.WeatherEntry.COLUMN_SHORT_DESC,
-            WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
-            WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
-            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
-            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
-            WeatherContract.LocationEntry.COLUMN_COORD_LAT,
-            WeatherContract.LocationEntry.COLUMN_COORD_LONG
+            CountersContract.CountersEntry.TABLE_NAME + "." + CountersContract.CountersEntry.COLUMN_ID,
+            CountersContract.CountersEntry.COLUMN_NAME,
+            CountersContract.CountersEntry.COLUMN_COUNTED,
+            CountersContract.CountersEntry.COLUMN_TYPE,
+            CountersContract.CountersEntry.COLUMN_STAR,
+            CountersContract.CountersEntry.COLUMN_STOP
     };
 
     private CountersAdapter countersAdapter;
@@ -55,7 +53,14 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Log.d(LOG_TAG, "OnCreateView");
 
         countersAdapter = new CountersAdapter(getActivity(), null, 0);
 
@@ -82,6 +87,12 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(COUNTERS_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         if (listViewPosition != ListView.INVALID_POSITION) {
             outState.putInt(SELECTED_KEY, listViewPosition);
@@ -92,26 +103,30 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        String sortOrder = CountersContract.CountersEntry.COLUMN_STAR + " ASC";
+        String sortOrder = CountersContract.CountersEntry.COLUMN_STAR; // + " ASC";
 
-        return new CursorLoader( getActivity(),
+        return new CursorLoader(
+                getActivity(),
                 CountersContract.CountersEntry.CONTENT_URI,
-                null,
+                COUNTERS_COLUMNS,
                 null,
                 null,
                 sortOrder
         );
-
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        countersAdapter.swapCursor(data);
+        if (listViewPosition != ListView.INVALID_POSITION) {
+            listViewData.smoothScrollToPosition(listViewPosition);
+        }
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        countersAdapter.swapCursor(null);
     }
 }
 
