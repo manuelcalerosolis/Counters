@@ -46,7 +46,7 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
     private ListView listViewData;
 
     public interface Callback {
-        public void onItemSelected(Uri dateUri);
+        public void onItemSelected(Cursor cursor);
     }
 
     public DataFragment(){
@@ -59,9 +59,6 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        Log.d(LOG_TAG, "OnCreateView");
-
         countersAdapter = new CountersAdapter(getActivity(), null, 0);
 
         View view = inflater.inflate(R.layout.fragmentdata, container, false);
@@ -74,6 +71,7 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
                 if (cursor != null) {
+                    ((Callback) getActivity()).onItemSelected(cursor);
                 }
                 listViewPosition = position;
             }

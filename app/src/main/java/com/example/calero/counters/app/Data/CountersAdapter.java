@@ -40,8 +40,5 @@ public class CountersAdapter extends CursorAdapter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
-
-
 }

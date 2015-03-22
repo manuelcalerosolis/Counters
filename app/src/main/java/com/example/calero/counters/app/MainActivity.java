@@ -1,6 +1,9 @@
 package com.example.calero.counters.app;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -9,10 +12,12 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.example.calero.counters.app.UI.Activities.DetailActivity;
+import com.example.calero.counters.app.UI.Fragments.DataFragment;
 import com.example.calero.counters.app.UI.Tabs.TabListener;
 import com.example.calero.counters.app.UI.ViewPagers.ViewPagerAdapter;
 
-public class MainActivity extends ActionBarActivity { // FragmentActivity{
+public class MainActivity extends ActionBarActivity implements DataFragment.Callback { // FragmentActivity{
 
     private static Context context;
 //    private final ActionBar actionBar = getSupportActionBar();
@@ -81,4 +86,10 @@ public class MainActivity extends ActionBarActivity { // FragmentActivity{
         return true;
     }
 
+    @Override
+    public void onItemSelected(Cursor cursor) {
+        Intent intent = new Intent(this, DetailActivity.class);
+                    //.setData(cursor);
+            startActivity(intent);
+    }
 }
