@@ -11,15 +11,72 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Header: Day, Date -->
         <TextView
-            android:text="Conteo"
+            android:text="Day"
             android:fontFamily="sans-serif-condensed"
-            android:id="@+id/detail_counted_textview"
+            android:id="@+id/detail_day_textview"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="@color/black"
             android:textSize="24sp" />
+
+        <TextView
+            android:text="Dates"
+            android:fontFamily="sans-serif-condensed"
+            android:id="@+id/detail_dates_textview"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_gravity="left"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0">
+
+                <ImageView
+                    android:id="@+id/detail_type_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="type"
+                    android:id="@+id/detail_type_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:layout_gravity="left"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="Count"
+                    android:fontFamily="sans-serif-light"
+                    android:id="@+id/detail_counted_textview"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/grey"
+                    android:textSize="96sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

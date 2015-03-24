@@ -41,5 +41,7 @@
     <string name="preference_minutes_label">minutes</string>
     <string name="preference_minutes_key" translatable="false">minutes</string>
     <string name="preference_minutes_default" translatable="false">5</string>
+    <string name="today">today</string>
+    <string name="tomorrow">tomorrow</string>
 
 </resources>

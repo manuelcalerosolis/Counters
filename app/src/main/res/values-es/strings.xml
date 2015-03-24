@@ -37,5 +37,7 @@
     <string name="fragment_counter_data">Counters data</string>
     <string name="action_share">Compartir</string>
     <string name="preference_minutes_label">minutes</string>
+    <string name="today">hoy</string>
+    <string name="tomorrow">mañana</string>
 
 </resources>

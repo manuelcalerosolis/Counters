@@ -32,11 +32,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.calero.counters.app.Data.CountersContract;
 import com.example.calero.counters.app.R;
+import com.example.calero.counters.app.Utils.UtilDate;
+
+import java.util.Date;
 
 
 /**
@@ -57,6 +59,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private static final int DETAIL_LOADER = 0;
 
     private TextView countedTextView;
+    private TextView typeTextView;
+    private TextView friendlyDateTextView;
+    private TextView elapsedDateTextView;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -73,24 +78,22 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
+        friendlyDateTextView = (TextView) rootView.findViewById(R.id.detail_day_textview);
+        elapsedDateTextView = (TextView) rootView.findViewById(R.id.detail_dates_textview);
         countedTextView = (TextView) rootView.findViewById(R.id.detail_counted_textview);
-        countedTextView.setText((CharSequence) uri.toString());        // using a fragment transaction.
+        typeTextView = (TextView) rootView.findViewById(R.id.detail_type_textview);
 
         return rootView;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.detailfragment, menu);
 
-        // Retrieve the share menu item
         MenuItem menuItem = menu.findItem(R.id.action_share);
 
-        // Get the provider and hold onto it to set/change the share intent.
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 
-        // If onLoadFinished happens before this, we can go ahead and set the share intent now.
         if (counters != null) {
             shareActionProvider.setShareIntent(createShareCountedIntent());
         }
@@ -117,8 +120,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         if ( null != uri ) {
-            // Now create and return a CursorLoader that will take care of
-            // creating a Cursor for the data being displayed.
             return new CursorLoader(
                     getActivity(),
                     uri,
@@ -136,9 +137,28 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         if (cursor != null && cursor.moveToFirst()) {
 
-            int columnCounted = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_COUNTED);
-            if (columnCounted != -1)
-                countedTextView.setText(cursor.getString(columnCounted));
+            int columnIndex;
+
+            columnIndex = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_COUNTED);
+            if (columnIndex != -1)
+                countedTextView.setText(cursor.getString(columnIndex));
+
+            columnIndex = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_TYPE);
+            if (columnIndex != -1)
+                typeTextView.setText(cursor.getString(columnIndex));
+
+            columnIndex = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
+            if (columnIndex != -1){
+                String dateText = cursor.getString(columnIndex);
+                Date date = UtilDate.getTimeStampFromString(dateText);
+
+                String friendlyDateText = UtilDate.getDayName(date.getTimeInMillis());
+                friendlyDateTextView.setText(dateText);
+
+                elapsedDateTextView.setText((CharSequence) date.toString());
+            }
+            
+            
 
 //            // Read weather condition ID from cursor
 //            int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
@@ -197,4 +217,5 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) { }
+
 }
