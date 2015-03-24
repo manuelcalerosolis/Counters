@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.calero.counters.app.MainActivity;
+import com.example.calero.counters.app.UI.Activities.MainActivity;
 
 public class RepositoryCounter {
 

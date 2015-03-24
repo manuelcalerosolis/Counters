@@ -7,11 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,34 +15,24 @@ import android.widget.ListView;
 
 import com.example.calero.counters.app.Data.CountersAdapter;
 import com.example.calero.counters.app.Data.CountersContract;
-import com.example.calero.counters.app.MainActivity;
-import com.example.calero.counters.app.Repositories.RepositoryCounter;
-import com.example.calero.counters.app.ModelData;
 import com.example.calero.counters.app.R;
-
-import java.util.ArrayList;
 
 public class DataFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String LOG_TAG = "COUNTERS_DATA_FRAGMENT"; // DataFragment.class.getSimpleName();
+    static final String DETAIL_URI = "URI";
+
     private static final int COUNTERS_LOADER = 0;
     private int listViewPosition;
     private static final String SELECTED_KEY = "selected_position";
 
-    private static final String[] COUNTERS_COLUMNS = {
-            CountersContract.CountersEntry.TABLE_NAME + "." + CountersContract.CountersEntry.COLUMN_ID,
-            CountersContract.CountersEntry.COLUMN_NAME,
-            CountersContract.CountersEntry.COLUMN_COUNTED,
-            CountersContract.CountersEntry.COLUMN_TYPE,
-            CountersContract.CountersEntry.COLUMN_STAR,
-            CountersContract.CountersEntry.COLUMN_STOP
-    };
+    static final int COLUMN_COUNTER_ID = 0;
 
     private CountersAdapter countersAdapter;
     private ListView listViewData;
 
     public interface Callback {
-        public void onItemSelected(Cursor cursor);
+        public void onItemSelected(Uri dateUri);
     }
 
     public DataFragment(){
@@ -71,7 +57,10 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
                 if (cursor != null) {
-                    ((Callback) getActivity()).onItemSelected(cursor);
+//                    ((Callback) getActivity()).onItemSelected(cursor);
+                    ((Callback) getActivity())
+                            .onItemSelected(CountersContract.CountersEntry.buildCountersEntryWithId(cursor.getInt(COLUMN_COUNTER_ID)));
+
                 }
                 listViewPosition = position;
             }
@@ -106,7 +95,7 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
         return new CursorLoader(
                 getActivity(),
                 CountersContract.CountersEntry.CONTENT_URI,
-                COUNTERS_COLUMNS,
+                CountersContract.CountersEntry.COUNTERS_COLUMNS,
                 null,
                 null,
                 sortOrder
@@ -119,7 +108,6 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
         if (listViewPosition != ListView.INVALID_POSITION) {
             listViewData.smoothScrollToPosition(listViewPosition);
         }
-
     }
 
     @Override

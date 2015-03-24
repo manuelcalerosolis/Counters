@@ -1,26 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/counter_detail_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.android.calero.app.DetailActivity"
+    tools:ignore="MergeRootFrame" />
 
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_gravity="left"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
 
-        <!-- Header: Day, Date -->
-        <TextView
-            android:text="Conteo"
-            android:fontFamily="sans-serif-condensed"
-            android:id="@+id/detail_counter_textview"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+<!--<?xml version="1.0" encoding="utf-8"?>-->
 
-    </LinearLayout>
-</ScrollView>
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<LinearLayout-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_gravity="left"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:orientation="vertical"-->
+        <!--android:padding="16dp">-->
+
+        <!--&lt;!&ndash; Header: Day, Date &ndash;&gt;-->
+        <!--<TextView-->
+            <!--android:text="Conteo"-->
+            <!--android:fontFamily="sans-serif-condensed"-->
+            <!--android:id="@+id/detail_counter_textview"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="24sp" />-->
+
+    <!--</LinearLayout>-->
+<!--</ScrollView>-->

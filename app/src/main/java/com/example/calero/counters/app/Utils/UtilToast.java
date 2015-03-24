@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.example.calero.counters.app.MainActivity;
+import com.example.calero.counters.app.UI.Activities.MainActivity;
 
 public class UtilToast {
 

@@ -20,13 +20,6 @@ public class CountersProvider extends ContentProvider {
 
     private static final UriMatcher uriMatcher = buildUriMatcher();
 
-    private static final SQLiteQueryBuilder queryBuilder;
-
-    static {
-        queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(CountersEntry.TABLE_NAME);
-    }
-
     private static UriMatcher buildUriMatcher(){
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = CountersContract.CONTENT_AUTHORITY;
@@ -45,6 +38,10 @@ public class CountersProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        queryBuilder.setTables(CountersEntry.TABLE_NAME);
+
         switch (uriMatcher.match(uri)) {
             case COUNTERS:
                 if (TextUtils.isEmpty(sortOrder)) sortOrder = "_ID ASC";

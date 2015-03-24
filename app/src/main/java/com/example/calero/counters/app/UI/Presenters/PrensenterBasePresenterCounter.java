@@ -2,7 +2,7 @@ package com.example.calero.counters.app.UI.Presenters;
 
 import android.os.Bundle;
 
-import com.example.calero.counters.app.MainActivity;
+import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.Models.ModelCounter;
 import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.Utils.UtilToast;

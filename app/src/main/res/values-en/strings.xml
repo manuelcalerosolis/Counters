@@ -36,5 +36,7 @@
     <string name="fragment_counter_set">Counter set</string>
     <string name="fragment_counter_data">Counters data</string>
     <string name="action_settings">Settings</string>
+    <string name="action_share">Share</string>
+    <string name="preference_minutes_label">minutes</string>
 
 </resources>
