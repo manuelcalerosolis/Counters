@@ -4,13 +4,26 @@ import com.example.calero.counters.app.UI.Fragments.Counters.TimeCounterFragment
 
 public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
 
-    TimeCounterFragment fragmentTimeCounter;
+    private View view;
 
-    public void setFragment(TimeCounterFragment fragment) {
-        if (fragment == null) {
-            throw new IllegalArgumentException("You can't set a null fragment");
+    public void setView(View view) {
+        if (view == null) {
+            throw new IllegalArgumentException("You can't set a null view");
         }
-        this.fragmentTimeCounter = fragment;
+        this.view = view;
+    }
+
+    public void onClickButtonPlus(){
+        if (!isBooleanInit())
+//            startCounter();
+        plusCounter();
+        view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
+    }
+
+    public void onClickButtonMinus(){
+        if (isBooleanInit())
+            minusCounter();
+        view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
 
     public int getFragmentType(){
@@ -21,4 +34,11 @@ public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
     public int getCounterType() {
         return 2;
     }
+
+    public interface View {
+
+        void refreshTextViewCounter(String stringCounterFormat);
+
+    }
+
 }

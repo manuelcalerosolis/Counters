@@ -36,6 +36,8 @@ public class TimeCounterFragment extends BaseFragmentCounter {
 
     static TimeCounterPresenter prensenterTimeCounter = new TimeCounterPresenter();
 
+    private static final String LOG_TAG = TimeCounterFragment.class.getSimpleName();
+
     public static TimeCounterFragment newInstance() {
         TimeCounterFragment fragmentTimeCounter = new TimeCounterFragment();
         fragmentTimeCounter.setArguments(prensenterTimeCounter.getBundle());
@@ -213,7 +215,6 @@ public class TimeCounterFragment extends BaseFragmentCounter {
 
     protected void finishCounterTimer(){
         finalizeCounterTimer();
-//        prensenterTimeCounter.saveCounter();
     }
 
     /*

@@ -150,12 +150,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             columnIndex = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
             if (columnIndex != -1){
                 String dateText = cursor.getString(columnIndex);
-                Date date = UtilDate.getTimeStampFromString(dateText);
 
-                String friendlyDateText = UtilDate.getDayName(date.getTimeInMillis());
-                friendlyDateTextView.setText(dateText);
+                elapsedDateTextView.setText(UtilDate.getTimeStampFromString(dateText).toString());
 
-                elapsedDateTextView.setText((CharSequence) date.toString());
+                friendlyDateTextView.setText(UtilDate.getFormattedMonthDay(dateText));
             }
             
             

@@ -29,6 +29,7 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
     public void onClickButtonCancel(){
         if (isBooleanInit())
             cancelCounter();
+        resetCounter();
     }
 
     public void onClickButtonSave(){
@@ -56,6 +57,17 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
         setBooleanInit(false);
         view.hideSaveAndCancel();
         toastTimeStampCancel();
+    }
+
+    public void onStart(){
+        if (savedInstanceState != null) {
+            setSavedInstance(savedInstanceState);
+        }
+        view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
+    }
+
+    public void onStop(){
+        savedInstanceState = getSavedIntance();
     }
 
     @Override public int getCounterType() {

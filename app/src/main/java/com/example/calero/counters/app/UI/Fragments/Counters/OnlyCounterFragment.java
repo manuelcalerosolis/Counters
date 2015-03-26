@@ -18,26 +18,74 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
     TextView textViewSaveCounter;
     ImageButton imageButtonCancel;
 
-    static final String STATE_COUNTER = "onlyCounter";
+    private static final String LOG_TAG = OnlyCounterFragment.class.getSimpleName();
 
-    static OnlyCounterPresenter presenterOnlyCounter = new OnlyCounterPresenter();
+    static OnlyCounterPresenter onlyCounterPresenter = new OnlyCounterPresenter();
+
+    private Bundle savedInstanceState;
 
     public static OnlyCounterFragment newInstance() {
+        Log.d(LOG_TAG, "newInstance");
+
         OnlyCounterFragment fragmentOnlyCounter = new OnlyCounterFragment();
-        fragmentOnlyCounter.setArguments(presenterOnlyCounter.getBundle());
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("someInt", 12345);
+
+        // fragmentOnlyCounter.setArguments(onlyCounterPresenter.getSavedIntance());
+
         return fragmentOnlyCounter;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "onCreate");
+
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            presenterOnlyCounter.setBundle(savedInstanceState);
-        }
+
+        Bundle bundle = getArguments();
+        if (bundle != null)
+            Log.d(LOG_TAG, String.valueOf(bundle.getInt("someInt", 0)));
+//            onlyCounterPresenter.setSavedInstance(bundle);
+
+        setRetainInstance(true);
+    }
+
+    @Override
+    public void onStart(){
+        Log.d(LOG_TAG, "onStart");
+
+        super.onStart();
+        onlyCounterPresenter.onStart();
+
+//        if (savedInstanceState != null) {
+//            Log.d(LOG_TAG, "onRestoreInstanceState() and != null");
+//            onlyCounterPresenter.setSavedInstance(savedInstanceState);
+//
+//        }
+    }
+
+    public void onStop(){
+        Log.d(LOG_TAG, "onStop");
+        super.onStop();
+        onlyCounterPresenter.onStop();
+//        savedInstanceState = onlyCounterPresenter.getSavedIntance();
+
+    }
+
+    public void onResume(){
+        super.onResume();
+        Log.d(LOG_TAG, "onResume");
+    }
+
+    public void onPause(){
+        super.onPause();
+        Log.d(LOG_TAG, "onPause");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "onCreateView");
 
         super.onCreateView(inflater, container, savedInstanceState);
 
@@ -45,61 +93,76 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
         textViewSaveCounter = (TextView) view.findViewById(R.id.textViewSaveCounter);
         linearLayoutStop = (LinearLayout) view.findViewById(R.id.linearLayoutStop);
         
-        if(presenterOnlyCounter.isBooleanInit())
+        if(onlyCounterPresenter.isBooleanInit())
             showSaveAndCancel();
 
         imageButtonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenterOnlyCounter.onClickButtonPlus();
+            onlyCounterPresenter.onClickButtonPlus();
             }
         });
 
         imageButtonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenterOnlyCounter.onClickButtonMinus();
+            onlyCounterPresenter.onClickButtonMinus();
             }
         });
 
         imageButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenterOnlyCounter.onClickButtonCancel();
+            onlyCounterPresenter.onClickButtonCancel();
             }
         });
 
         textViewSaveCounter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenterOnlyCounter.onClickButtonSave();
+                onlyCounterPresenter.onClickButtonSave();
             }
         });
 
-        setRetainInstance(true);
+//        Bundle bundle = getArguments();
+//        if (bundle != null)
+//            onlyCounterPresenter.setSavedInstance(bundle);
+
+        Bundle bundle = getArguments();
+        if (bundle != null)
+            Log.d(LOG_TAG, String.valueOf(bundle.getInt("someInt", 0)));
 
         return view;
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        presenterOnlyCounter.getBundle();
-        super.onSaveInstanceState(savedInstanceState);
+        Log.d(LOG_TAG, "onSaveInstanceState()");
+        savedInstanceState = onlyCounterPresenter.getSavedIntance();
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null){
-            presenterOnlyCounter.setBundle(savedInstanceState);
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "onRestoreInstanceState()");
+        if (savedInstanceState != null) {
+            Log.d(LOG_TAG, "onRestoreInstanceState() and != null");
+            onlyCounterPresenter.setSavedInstance(savedInstanceState);
         }
-        refreshTextViewCounter(presenterOnlyCounter.getModelCounter().getStringCounterFormat());
     }
+
+//    @Override
+//    public void onActivityCreated(Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        if (savedInstanceState != null){
+//            onlyCounterPresenter.setBundle(savedInstanceState);
+//        }
+//        refreshTextViewCounter(onlyCounterPresenter.getModelCounter().getStringCounterFormat());
+//    }
+//
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenterOnlyCounter.setView(this);
+        onlyCounterPresenter.setView(this);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.calero.counters.app.UI.Presenters;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.Models.ModelCounter;
@@ -11,7 +12,9 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
 
     private boolean booleanInit = false;
 
-    private final ModelCounter modelCounter = new ModelCounter(getCounterType());
+    private ModelCounter modelCounter = new ModelCounter(getCounterType());
+
+    protected Bundle savedInstanceState;
 
     public ModelCounter getModelCounter() {
         return modelCounter;
@@ -67,8 +70,38 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
 
     public void setBundle(Bundle bundle ){
         setBooleanInit(bundle.getBoolean("booleanInit", false));
-        modelCounter.setLongCounter(bundle.getLong("longCounter", 0));
+        modelCounter.setLongCounter(bundle.getLong("longCounter", 123456));
         modelCounter.setTimeStampStartSerializable(bundle.getSerializable("timeStampStart"));
+    }
+
+    public Bundle getSavedIntance(){
+
+        Log.d("Only getSavedIntance", ( String.valueOf( modelCounter.getLongCounter() ) ) );
+
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("booleanInit", isBooleanInit());
+        bundle.putLong("longCounter", modelCounter.getLongCounter());
+        bundle.putSerializable("timeStampStart", modelCounter.getTimeStampStart());
+        return (bundle);
+    }
+
+    public void setSavedInstance(Bundle bundle ){
+
+        Log.d("Only setSavedInstance", (String.valueOf( bundle.getLong("longCounter") ) ) );
+
+        setBooleanInit(bundle.getBoolean("booleanInit", false));
+        modelCounter.setLongCounter(bundle.getLong("longCounter", 123456));
+        modelCounter.setTimeStampStartSerializable(bundle.getSerializable("timeStampStart"));
+    }
+
+    public void onStart(){
+        if (savedInstanceState != null) {
+            setSavedInstance(savedInstanceState);
+        }
+    }
+
+    public void onStop(){
+        savedInstanceState = getSavedIntance();
     }
 
     public abstract int getCounterType();
