@@ -28,12 +28,6 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
         Log.d(LOG_TAG, "newInstance");
 
         OnlyCounterFragment fragmentOnlyCounter = new OnlyCounterFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putInt("someInt", 12345);
-
-        // fragmentOnlyCounter.setArguments(onlyCounterPresenter.getSavedIntance());
-
         return fragmentOnlyCounter;
     }
 
@@ -42,45 +36,20 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
         Log.d(LOG_TAG, "onCreate");
 
         super.onCreate(savedInstanceState);
-
-        Bundle bundle = getArguments();
-        if (bundle != null)
-            Log.d(LOG_TAG, String.valueOf(bundle.getInt("someInt", 0)));
-//            onlyCounterPresenter.setSavedInstance(bundle);
-
         setRetainInstance(true);
     }
 
     @Override
     public void onStart(){
         Log.d(LOG_TAG, "onStart");
-
         super.onStart();
         onlyCounterPresenter.onStart();
-
-//        if (savedInstanceState != null) {
-//            Log.d(LOG_TAG, "onRestoreInstanceState() and != null");
-//            onlyCounterPresenter.setSavedInstance(savedInstanceState);
-//
-//        }
     }
 
     public void onStop(){
         Log.d(LOG_TAG, "onStop");
         super.onStop();
         onlyCounterPresenter.onStop();
-//        savedInstanceState = onlyCounterPresenter.getSavedIntance();
-
-    }
-
-    public void onResume(){
-        super.onResume();
-        Log.d(LOG_TAG, "onResume");
-    }
-
-    public void onPause(){
-        super.onPause();
-        Log.d(LOG_TAG, "onPause");
     }
 
     @Override
@@ -124,14 +93,6 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
             }
         });
 
-//        Bundle bundle = getArguments();
-//        if (bundle != null)
-//            onlyCounterPresenter.setSavedInstance(bundle);
-
-        Bundle bundle = getArguments();
-        if (bundle != null)
-            Log.d(LOG_TAG, String.valueOf(bundle.getInt("someInt", 0)));
-
         return view;
     }
 
@@ -148,16 +109,6 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
             onlyCounterPresenter.setSavedInstance(savedInstanceState);
         }
     }
-
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        if (savedInstanceState != null){
-//            onlyCounterPresenter.setBundle(savedInstanceState);
-//        }
-//        refreshTextViewCounter(onlyCounterPresenter.getModelCounter().getStringCounterFormat());
-//    }
-//
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

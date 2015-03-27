@@ -40,5 +40,6 @@
     <string name="preference_minutes_label">minutes</string>
     <string name="today">today</string>
     <string name="tomorrow">tomorrow</string>
+    <string name="tv_label">insert top number</string>
 
 </resources>

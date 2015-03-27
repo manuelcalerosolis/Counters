@@ -90,7 +90,7 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
         Log.d("Only setSavedInstance", (String.valueOf( bundle.getLong("longCounter") ) ) );
 
         setBooleanInit(bundle.getBoolean("booleanInit", false));
-        modelCounter.setLongCounter(bundle.getLong("longCounter", 123456));
+        modelCounter.setLongCounter(bundle.getLong("longCounter", 0));
         modelCounter.setTimeStampStartSerializable(bundle.getSerializable("timeStampStart"));
     }
 

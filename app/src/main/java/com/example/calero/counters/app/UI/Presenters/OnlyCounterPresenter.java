@@ -60,14 +60,8 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
     }
 
     public void onStart(){
-        if (savedInstanceState != null) {
-            setSavedInstance(savedInstanceState);
-        }
+        super.onStart();
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
-    }
-
-    public void onStop(){
-        savedInstanceState = getSavedIntance();
     }
 
     @Override public int getCounterType() {

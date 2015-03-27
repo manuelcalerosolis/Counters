@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import com.example.calero.counters.app.UI.Presenters.TimeCounterPresenter;
 
 import java.util.concurrent.TimeUnit;
 
-public class TimeCounterFragment extends BaseFragmentCounter {
+public class TimeCounterFragment extends BaseFragmentCounter  implements TimeCounterPresenter.View{
 
     TextView textViewTimer;
 
@@ -34,49 +35,37 @@ public class TimeCounterFragment extends BaseFragmentCounter {
     long longHours      = 0;
     long longMinutes    = 1;
 
-    static TimeCounterPresenter prensenterTimeCounter = new TimeCounterPresenter();
+    static TimeCounterPresenter timeCounterPresenter = new TimeCounterPresenter();
 
     private static final String LOG_TAG = TimeCounterFragment.class.getSimpleName();
 
     public static TimeCounterFragment newInstance() {
         TimeCounterFragment fragmentTimeCounter = new TimeCounterFragment();
-        fragmentTimeCounter.setArguments(prensenterTimeCounter.getBundle());
         return fragmentTimeCounter;
     }
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Bundle bundle = getArguments();
-        if (bundle != null)
-            prensenterTimeCounter.setBundle(bundle);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_time_counter, container, false);
+//        View view = inflater.inflate(R.layout.fragment_time_counter, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
 
         textViewTimer = (TextView) view.findViewById(R.id.textViewTimer);
         refreshTextViewTimer();
-
-        textViewCounter = (TextView) view.findViewById(R.id.list_item_counter_textview);
-
-        linearLayoutStop = (LinearLayout) view.findViewById(R.id.linearLayoutStop);
-
         imageButtonPlusTime = (ImageButton) view.findViewById(R.id.imageButtonPlusTime);
         imageButtonMinusTime = (ImageButton) view.findViewById(R.id.imageButtonMinusTime);
         imageButtonPlayTime = (ImageButton) view.findViewById(R.id.imageButtonPlayTime);
         imageButtonStopTime = (ImageButton) view.findViewById(R.id.imageButtonPauseTime);
 
-        imageButtonPlus = (ImageButton) view.findViewById(R.id.imageButtonPlus);
-        imageButtonMinus = (ImageButton) view.findViewById(R.id.imageButtonMinus);
-
         imageButtonPlayTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prensenterTimeCounter.toggleBooleanInit();
-                if (prensenterTimeCounter.isBooleanInit())
+                timeCounterPresenter.toggleBooleanInit();
+                if (timeCounterPresenter.isBooleanInit())
                     startCounter();
                 else
                     pauseCounter();
@@ -123,20 +112,15 @@ public class TimeCounterFragment extends BaseFragmentCounter {
         imageButtonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(prensenterTimeCounter.isBooleanInit()) {
-                    prensenterTimeCounter.plusCounter();
-                    //refreshTextViewCounter();
-                }
-                else
-                    MainActivity.showAppToast(R.string.start_time_please);
+                timeCounterPresenter.onClickButtonPlus();
             }
         });
 
         imageButtonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(prensenterTimeCounter.isBooleanInit()){
-                    prensenterTimeCounter.minusCounter();
+                if(timeCounterPresenter.isBooleanInit()){
+                    timeCounterPresenter.minusCounter();
                 }
                 else
                     MainActivity.showAppToast(R.string.start_time_please);
@@ -147,20 +131,32 @@ public class TimeCounterFragment extends BaseFragmentCounter {
     }
 
     @Override
-    protected int getFragmentLayout() {
-        return 0;
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        timeCounterPresenter.setView(this);
     }
 
+    @Override
+    public void onStart(){
+        Log.d(LOG_TAG, "onStart");
+        super.onStart();
+        timeCounterPresenter.onStart();
+    }
+
+    public void onStop(){
+        Log.d(LOG_TAG, "onStop");
+        super.onStop();
+        timeCounterPresenter.onStop();
+    }
+
+    @Override
+    protected int getFragmentLayout() {
+        return R.layout.fragment_time_counter;
+    }
+
+    @Override
     public void refreshTextViewCounter( String stringCounterFormat ){
         textViewCounter.setText(stringCounterFormat);
-    }
-
-    public void showSaveAndCancel(){
-        linearLayoutStop.setVisibility(View.VISIBLE);
-    }
-
-    public void hideSaveAndCancel(){
-        linearLayoutStop.setVisibility(View.INVISIBLE);
     }
 
     private void startCounter(){
@@ -191,7 +187,7 @@ public class TimeCounterFragment extends BaseFragmentCounter {
     }
 
     private void refreshTextViewTimer(){
-        textViewTimer.setText(String.format("%02d:%02d:%02d",longHours,longMinutes,0));
+        textViewTimer.setText(String.format("%02d:%02d:%02d", longHours, longMinutes, 0));
     }
 
     protected void buildCounterTimer(){
@@ -206,7 +202,7 @@ public class TimeCounterFragment extends BaseFragmentCounter {
     }
 
     protected void finalizeCounterTimer(){
-        prensenterTimeCounter.setBooleanInit(false);
+        timeCounterPresenter.setBooleanInit(false);
         if(counterTimer != null){
             counterTimer.cancel();
             counterTimer = null;
@@ -253,11 +249,11 @@ public class TimeCounterFragment extends BaseFragmentCounter {
         }
 
         public void toggle() {
-            if (prensenterTimeCounter.isBooleanInit())
+            if (timeCounterPresenter.isBooleanInit())
                 this.cancel();
             else
                 this.start();
-            prensenterTimeCounter.toggleBooleanInit();
+            timeCounterPresenter.toggleBooleanInit();
         }
 
     }
