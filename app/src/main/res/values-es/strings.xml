@@ -40,5 +40,6 @@
     <string name="today">hoy</string>
     <string name="tomorrow">mañana</string>
     <string name="tv_label">insert top number</string>
+    <string name="dialog_text">Counter set</string>
 
 </resources>

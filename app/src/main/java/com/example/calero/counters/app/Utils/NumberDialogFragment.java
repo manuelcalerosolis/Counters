@@ -17,6 +17,8 @@ import com.example.calero.counters.app.UI.Activities.MainActivity;
  */
 public class NumberDialogFragment extends DialogFragment {
 
+    EditText editTextTotal;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -27,24 +29,29 @@ public class NumberDialogFragment extends DialogFragment {
 
         builder.setView(numberDialog);
 
-        final EditText input = (EditText) numberDialog.findViewById(R.id.numberInput);
+        final EditText editTextTotal = (EditText) numberDialog.findViewById(R.id.numberInput);
 
-        builder.setMessage("fire_missiles")
-                .setPositiveButton("fire", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.dialog_text)
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
+
                     }
                 })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+                        editTextTotal.setText("0");
                     }
                 });
         // Create the AlertDialog object and return it
         return builder.create();
     }
 
+    public void setEditTextTotal(int total){
+        editTextTotal.setText(String.valueOf(total));
+    }
 
-    public void setValue(){}
+    public int getEditTextTotal() {
+        return Integer.valueOf(editTextTotal.getText().toString());
+    }
 
 }

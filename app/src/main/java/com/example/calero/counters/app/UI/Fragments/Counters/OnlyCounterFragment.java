@@ -89,7 +89,7 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
         textViewSaveCounter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onlyCounterPresenter.onClickButtonSave();
+            onlyCounterPresenter.onClickButtonSave();
             }
         });
 

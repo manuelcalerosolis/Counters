@@ -44,5 +44,8 @@
     <string name="today">today</string>
     <string name="tomorrow">tomorrow</string>
     <string name="tv_label">insert top number</string>
+    <string name="dialog_text">Counter set</string>
+    <string name="dialog_ok">ok</string>
+    <string name="dialog_cancel">cancel</string>
 
 </resources>

@@ -26,7 +26,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total"
-                android:id="@+id/textViewTotal"
                 android:textSize="30sp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
@@ -36,7 +35,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewTotal"
+                android:id="@+id/textViewSet"
                 android:layout_weight="1"
                 android:text="0"
                 android:textColor="@color/white"

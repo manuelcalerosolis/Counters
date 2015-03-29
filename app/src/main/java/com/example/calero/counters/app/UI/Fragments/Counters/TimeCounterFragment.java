@@ -19,7 +19,7 @@ import com.example.calero.counters.app.UI.Presenters.TimeCounterPresenter;
 
 import java.util.concurrent.TimeUnit;
 
-public class TimeCounterFragment extends BaseFragmentCounter  implements TimeCounterPresenter.View{
+public class TimeCounterFragment extends BaseFragmentCounter implements TimeCounterPresenter.View{
 
     TextView textViewTimer;
 
@@ -50,8 +50,6 @@ public class TimeCounterFragment extends BaseFragmentCounter  implements TimeCou
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-//        View view = inflater.inflate(R.layout.fragment_time_counter, container, false);
         super.onCreateView(inflater, container, savedInstanceState);
 
         textViewTimer = (TextView) view.findViewById(R.id.textViewTimer);
@@ -119,11 +117,7 @@ public class TimeCounterFragment extends BaseFragmentCounter  implements TimeCou
         imageButtonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(timeCounterPresenter.isBooleanInit()){
-                    timeCounterPresenter.minusCounter();
-                }
-                else
-                    MainActivity.showAppToast(R.string.start_time_please);
+                timeCounterPresenter.onClickButtonMinus();
             }
         });
 

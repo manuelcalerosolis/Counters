@@ -1,32 +1,31 @@
 package com.example.calero.counters.app.UI.Fragments.Counters;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.calero.counters.app.R;
-import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.UI.Presenters.SetCounterPresenter;
 import com.example.calero.counters.app.Utils.NumberDialogFragment;
 
-public class SetCounterFragment extends BaseFragmentCounter {
+public class SetCounterFragment extends BaseFragmentCounter implements SetCounterPresenter.View {
 
     ImageButton imageButtonStop;
 
-    TextView editTextTotal;
+    LinearLayout linearLayoutSet;
+    TextView textViewSet;
+
+    private static final String LOG_TAG = SetCounterFragment.class.getSimpleName();
 
     static SetCounterPresenter prensenterSetCounter = new SetCounterPresenter();
 
     public static SetCounterFragment newInstance() {
         SetCounterFragment fragmentSetCounter = new SetCounterFragment();
-//        fragmentSetCounter.setArguments(prensenterSetCounter.getBundle());
         return fragmentSetCounter;
     }
 
@@ -36,40 +35,29 @@ public class SetCounterFragment extends BaseFragmentCounter {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_set_counter, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
 
-        editTextTotal           = (TextView) view.findViewById(R.id.textViewTotal);
-        editTextTotal.setOnClickListener(new View.OnClickListener() {
+        linearLayoutSet = (LinearLayout) view.findViewById(R.id.linearLayoutSet);
+        linearLayoutSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberDialogFragment numberDialogFragment = new NumberDialogFragment();
-                numberDialogFragment.show(getFragmentManager(),"");
+                prensenterSetCounter.setTotalCounter();
             }
         });
 
-        textViewCounter         = (TextView) view.findViewById(R.id.list_item_counter_textview);
-
-        imageButtonStop         = (ImageButton) view.findViewById(R.id.imageButtonStop);
-
-        imageButtonPlus         = (ImageButton) view.findViewById(R.id.imageButtonPlus);
-        imageButtonMinus        = (ImageButton) view.findViewById(R.id.imageButtonMinus);
-
-        refreshTextViewCounter();
+        textViewSet = (TextView) view.findViewById(R.id.textViewSet);
 
         imageButtonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (prensenterSetCounter.getLongCounter() < Long.parseLong( editTextTotal.getText().toString() ))
-//                    prensenterSetCounter.plusCounter();
-                refreshTextViewCounter();
+            prensenterSetCounter.onClickButtonPlus();
             }
         });
 
         imageButtonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prensenterSetCounter.minusCounter();
-                refreshTextViewCounter();
+            prensenterSetCounter.onClickButtonMinus();
             }
         });
 
@@ -77,12 +65,43 @@ public class SetCounterFragment extends BaseFragmentCounter {
     }
 
     @Override
-    protected int getFragmentLayout() {
-        return 2;
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        prensenterSetCounter.setView(this);
     }
 
-    private void refreshTextViewCounter(){
-//        textViewCounter.setText(prensenterSetCounter.getLongCounterFormat());
+    @Override
+    protected int getFragmentLayout() {
+        return R.layout.fragment_set_counter;
+    }
+
+    @Override
+    public void onStart(){
+        Log.d(LOG_TAG, "onStart");
+        super.onStart();
+        prensenterSetCounter.onStart();
+    }
+
+    public void onStop(){
+        Log.d(LOG_TAG, "onStop");
+        super.onStop();
+        prensenterSetCounter.onStop();
+    }
+
+    public void setTextTotal( int total ){
+        textViewSet.setText(String.valueOf(total));
+    }
+
+    public int getNumberDialogFragment(){
+        NumberDialogFragment numberDialogFragment = new NumberDialogFragment();
+        numberDialogFragment.show(getFragmentManager(), "");
+        return numberDialogFragment.getEditTextTotal();
+    }
+
+    @Override
+    public void refreshTextViewCounter( String stringCounterFormat ){
+        if (textViewCounter != null)
+            textViewCounter.setText(stringCounterFormat);
     }
 
 }
