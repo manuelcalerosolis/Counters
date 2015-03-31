@@ -44,9 +44,10 @@
                 android:layout_weight="0">
 
                 <ImageView
-                    android:id="@+id/detail_type_icon"
+                    android:id="@+id/detail_icon_imageview"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher" />
 
                 <TextView
                     android:text="type"

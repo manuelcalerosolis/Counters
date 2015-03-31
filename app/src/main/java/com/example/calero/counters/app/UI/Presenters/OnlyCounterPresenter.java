@@ -28,13 +28,13 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
 
     public void onClickButtonCancel(){
         if (isBooleanInit())
-            cancelCounter();
+            onCancelCounter();
         resetCounter();
     }
 
     public void onClickButtonSave(){
         if (isBooleanInit())
-            saveCounter();
+            onSaveCounter();
         resetCounter();
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
@@ -46,14 +46,14 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
         view.showSaveAndCancel();
     }
 
-    public void saveCounter(){
+    public void onSaveCounter(){
         setBooleanInit(false);
         getModelCounter().insertDatabase();
         view.hideSaveAndCancel();
         toastTimeStampSave();
     }
 
-    public void cancelCounter(){
+    public void onCancelCounter(){
         setBooleanInit(false);
         view.hideSaveAndCancel();
         toastTimeStampCancel();

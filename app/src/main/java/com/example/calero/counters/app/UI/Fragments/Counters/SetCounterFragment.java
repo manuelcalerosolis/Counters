@@ -1,24 +1,35 @@
 package com.example.calero.counters.app.UI.Fragments.Counters;
 
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.calero.counters.app.R;
+import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.UI.Presenters.SetCounterPresenter;
 import com.example.calero.counters.app.Utils.NumberDialogFragment;
 
+//TODO Comprobar el counter set si toma los valores del dialogo
+
 public class SetCounterFragment extends BaseFragmentCounter implements SetCounterPresenter.View {
 
-    ImageButton imageButtonStop;
+    ImageButton imageButtonCancel;
+    ImageButton imageButtonSave;
 
-    LinearLayout linearLayoutSet;
     TextView textViewSet;
+    TextView textViewTotal;
 
     private static final String LOG_TAG = SetCounterFragment.class.getSimpleName();
 
@@ -37,8 +48,23 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        linearLayoutSet = (LinearLayout) view.findViewById(R.id.linearLayoutSet);
-        linearLayoutSet.setOnClickListener(new View.OnClickListener() {
+        imageButtonCancel = (ImageButton) view.findViewById(R.id.imageButtonCancel);
+        imageButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prensenterSetCounter.onCancelCounter();
+            }
+        });
+
+        imageButtonSave = (ImageButton) view.findViewById(R.id.imageButtonSave);
+        imageButtonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prensenterSetCounter.onSaveCounter();
+            }
+        });
+        textViewTotal = (TextView) view.findViewById(R.id.textViewTotal);
+        textViewTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 prensenterSetCounter.setTotalCounter();
@@ -46,18 +72,24 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
         });
 
         textViewSet = (TextView) view.findViewById(R.id.textViewSet);
+        textViewSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prensenterSetCounter.setTotalCounter();
+            }
+        });
 
         imageButtonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            prensenterSetCounter.onClickButtonPlus();
+                prensenterSetCounter.onClickButtonPlus();
             }
         });
 
         imageButtonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            prensenterSetCounter.onClickButtonMinus();
+                prensenterSetCounter.onClickButtonMinus();
             }
         });
 
@@ -77,31 +109,70 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
 
     @Override
     public void onStart(){
-        Log.d(LOG_TAG, "onStart");
         super.onStart();
         prensenterSetCounter.onStart();
     }
 
     public void onStop(){
-        Log.d(LOG_TAG, "onStop");
         super.onStop();
         prensenterSetCounter.onStop();
     }
 
-    public void setTextTotal( int total ){
-        textViewSet.setText(String.valueOf(total));
+    public int getTextTotal(){
+        return Integer.valueOf(textViewSet.getText().toString());
     }
 
-    public int getNumberDialogFragment(){
-        NumberDialogFragment numberDialogFragment = new NumberDialogFragment();
-        numberDialogFragment.show(getFragmentManager(), "");
-        return numberDialogFragment.getEditTextTotal();
+    public void setButtonsVisible(){
+        imageButtonCancel.setVisibility(android.view.View.VISIBLE);
+        imageButtonSave.setVisibility(android.view.View.VISIBLE);
+    }
+
+    public void setButtonsInvisible(){
+        imageButtonCancel.setVisibility(android.view.View.INVISIBLE);
+        imageButtonSave.setVisibility(android.view.View.INVISIBLE);
+    }
+
+    public void getNumberDialogFragment(){
+        NumberDialog numberDialog = new NumberDialog();
+        numberDialog.show(getFragmentManager(), "");
     }
 
     @Override
     public void refreshTextViewCounter( String stringCounterFormat ){
         if (textViewCounter != null)
             textViewCounter.setText(stringCounterFormat);
+    }
+
+    public class NumberDialog extends DialogFragment {
+
+        EditText editTextTotal;
+
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.getAppContext());
+            View numberDialog = layoutInflater.inflate(R.layout.number_dialog, null);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_DARK);
+
+            builder.setView(numberDialog);
+
+            editTextTotal = (EditText) numberDialog.findViewById(R.id.numberInput);
+
+            builder.setMessage(R.string.dialog_text)
+                    .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            textViewSet.setText( editTextTotal.getText().toString() );
+                        }
+                    })
+                    .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+            return builder.create();
+        }
+
     }
 
 }

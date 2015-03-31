@@ -31,11 +31,11 @@ public class CountersAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
 
         CountersHolder countersHolder = (CountersHolder) view.getTag();
-
         countersHolder.setImageViewTypeFromCursor(cursor);
-        countersHolder.setTextViewNameFromCursor(cursor);
         countersHolder.setTextViewCounterFromCursor(cursor);
+
         try {
+            countersHolder.setTextViewDatesIntervalFromCursor(cursor);
             countersHolder.setTextViewDurationFromCursor(cursor);
         } catch (ParseException e) {
             e.printStackTrace();

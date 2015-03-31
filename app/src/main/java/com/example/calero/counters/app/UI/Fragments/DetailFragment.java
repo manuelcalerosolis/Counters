@@ -32,13 +32,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.calero.counters.app.Data.CountersContract;
 import com.example.calero.counters.app.R;
+import com.example.calero.counters.app.Utils.UtilApplication;
 import com.example.calero.counters.app.Utils.UtilDate;
-
-import java.util.Date;
 
 
 /**
@@ -62,6 +62,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private TextView typeTextView;
     private TextView friendlyDateTextView;
     private TextView elapsedDateTextView;
+    private ImageView iconImageView;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -82,6 +83,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         elapsedDateTextView = (TextView) rootView.findViewById(R.id.detail_dates_textview);
         countedTextView = (TextView) rootView.findViewById(R.id.detail_counted_textview);
         typeTextView = (TextView) rootView.findViewById(R.id.detail_type_textview);
+        iconImageView = (ImageView) rootView.findViewById(R.id.detail_icon_imageview);
 
         return rootView;
     }
@@ -144,8 +146,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                 countedTextView.setText(cursor.getString(columnIndex));
 
             columnIndex = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_TYPE);
-            if (columnIndex != -1)
-                typeTextView.setText(cursor.getString(columnIndex));
+            if (columnIndex != -1) {
+                iconImageView.setImageResource(UtilApplication.getArtResourceForCounterType(cursor.getInt(columnIndex)));
+                typeTextView.setText(UtilApplication.getTextResourceForCounterType(cursor.getInt(columnIndex)));
+            }
 
             columnIndex = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
             if (columnIndex != -1){
@@ -155,58 +159,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
                 friendlyDateTextView.setText(UtilDate.getFormattedMonthDay(dateText));
             }
-            
-            
 
-//            // Read weather condition ID from cursor
-//            int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
-//
-//            // Use weather art image
-//            mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
-//
-//            // Read date from cursor and update views for day of week and date
-//            long date = data.getLong(COL_WEATHER_DATE);
-//            String friendlyDateText = Utility.getDayName(getActivity(), date);
-//            String dateText = Utility.getFormattedMonthDay(getActivity(), date);
-//            mFriendlyDateView.setText(friendlyDateText);
-//            mDateView.setText(dateText);
-//
-//            // Read description from cursor and update view
-//            String description = data.getString(COL_WEATHER_DESC);
-//            mDescriptionView.setText(description);
-//
-//            // For accessibility, add a content description to the icon field
-//            mIconView.setContentDescription(description);
-//
-//            // Read high temperature from cursor and update view
-//            boolean isMetric = Utility.isMetric(getActivity());
-//
-//            double high = data.getDouble(COL_WEATHER_MAX_TEMP);
-//            String highString = Utility.formatTemperature(getActivity(), high);
-//            mHighTempView.setText(highString);
-//
-//            // Read low temperature from cursor and update view
-//            double low = data.getDouble(COL_WEATHER_MIN_TEMP);
-//            String lowString = Utility.formatTemperature(getActivity(), low);
-//            mLowTempView.setText(lowString);
-//
-//            // Read humidity from cursor and update view
-//            float humidity = data.getFloat(COL_WEATHER_HUMIDITY);
-//            mHumidityView.setText(getActivity().getString(R.string.format_humidity, humidity));
-//
-//            // Read wind speed and direction from cursor and update view
-//            float windSpeedStr = data.getFloat(COL_WEATHER_WIND_SPEED);
-//            float windDirStr = data.getFloat(COL_WEATHER_DEGREES);
-//            mWindView.setText(Utility.getFormattedWind(getActivity(), windSpeedStr, windDirStr));
-//
-//            // Read pressure from cursor and update view
-//            float pressure = data.getFloat(COL_WEATHER_PRESSURE);
-//            mPressureView.setText(getActivity().getString(R.string.format_pressure, pressure));
-//
-//            // We still need this for the share intent
-//            mForecast = String.format("%s - %s - %s/%s", dateText, description, high, low);
+            // Shared information
 
-            // If onCreateOptionsMenu has already happened, we need to update the share intent now.
+            counters = String.format("%s - %s", typeTextView.getText(), countedTextView.getText());
             if (shareActionProvider != null) {
                 shareActionProvider.setShareIntent(createShareCountedIntent());
             }
@@ -214,6 +170,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) { }
+    public void onLoaderReset(Loader<Cursor> loader) {}
 
 }

@@ -74,7 +74,7 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
             @Override
             public void onClick(View v) {
                 stopCounter();
-                finalizeCounterTimer();
+                finishCounterTimer();
                 refreshTextViewTimer();
             }
         });
@@ -195,16 +195,12 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
         counterTimer    = new CounterTimer(millisLeft, 1000);
     }
 
-    protected void finalizeCounterTimer(){
-        timeCounterPresenter.setBooleanInit(false);
+    protected void finishCounterTimer(){
+        timeCounterPresenter.saveCounter();
         if(counterTimer != null){
             counterTimer.cancel();
             counterTimer = null;
         }
-    }
-
-    protected void finishCounterTimer(){
-        finalizeCounterTimer();
     }
 
     /*

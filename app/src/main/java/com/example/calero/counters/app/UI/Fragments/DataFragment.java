@@ -57,7 +57,6 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
                 if (cursor != null) {
-//                    ((Callback) getActivity()).onItemSelected(cursor);
                     ((Callback) getActivity())
                             .onItemSelected(CountersContract.CountersEntry.buildCountersEntryWithId(cursor.getInt(COLUMN_COUNTER_ID)));
 
@@ -90,7 +89,7 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        String sortOrder = CountersContract.CountersEntry.COLUMN_STAR; // + " ASC";
+        String sortOrder = CountersContract.CountersEntry.COLUMN_STAR + " DESC"; // + " ASC";
 
         return new CursorLoader(
                 getActivity(),

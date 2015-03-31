@@ -22,28 +22,54 @@
             android:gravity="center_horizontal"
             android:visibility="visible">
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButtonCancel"
+                android:src="@drawable/cancel_icon"
+                android:background="@null"
+                android:focusableInTouchMode="false"
+                android:padding="5dp"
+                android:focusable="false"
+                android:visibility="invisible" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total"
+                android:text="TOTAL"
+                android:id="@+id/textViewTotal"
                 android:textSize="30sp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:paddingLeft="20sp"
-                android:paddingRight="20sp" />
+                android:paddingRight="20sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewSet"
                 android:layout_weight="1"
-                android:text="0"
+                android:text="100"
                 android:textColor="@color/white"
+                android:layout_gravity="center"
                 android:textSize="30sp"
                 android:gravity="right"
                 android:paddingRight="20sp"
                 android:paddingLeft="20sp"
-                android:password="false" />
+                android:textStyle="bold"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButtonSave"
+                android:src="@drawable/stop_time_icon"
+                android:background="@null"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                android:visibility="invisible" />
+
 
         </LinearLayout>
 

@@ -44,7 +44,7 @@ public class CountersProvider extends ContentProvider {
 
         switch (uriMatcher.match(uri)) {
             case COUNTERS:
-                if (TextUtils.isEmpty(sortOrder)) sortOrder = "_ID ASC";
+                if (TextUtils.isEmpty(sortOrder)) sortOrder = "_ID DESC";
                 break;
 
             case COUNTERS_ID:

@@ -1,9 +1,8 @@
 package com.example.calero.counters.app.UI.Presenters;
 
-import com.example.calero.counters.app.UI.Fragments.Counters.OnlyCounterFragment;
-import com.example.calero.counters.app.Utils.NumberDialogFragment;
-
 import java.util.Date;
+
+// TODO vuelta a origen tras finalizar el conteo
 
 public class SetCounterPresenter extends PrensenterBasePresenterCounter {
 
@@ -19,8 +18,15 @@ public class SetCounterPresenter extends PrensenterBasePresenterCounter {
     public void onClickButtonPlus(){
         if (!isBooleanInit())
             startCounter();
-        plusCounter();
+
+        if (isPlusCounter())
+            plusCounter();
+
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
+    }
+
+    private boolean isPlusCounter() {
+        return (getCounter() < view.getTextTotal());
     }
 
     public void onClickButtonMinus(){
@@ -33,6 +39,7 @@ public class SetCounterPresenter extends PrensenterBasePresenterCounter {
         setBooleanInit(true);
         getModelCounter().setTimeStampStart(new Date());
         toastTimeStampStart();
+        view.setButtonsVisible();
     }
 
     public void onStart(){
@@ -41,22 +48,39 @@ public class SetCounterPresenter extends PrensenterBasePresenterCounter {
     }
 
     public void setTotalCounter(){
-        int intCounterSet = view.getNumberDialogFragment();
-        if (intCounterSet != 0);
-            view.setTextTotal(intCounterSet);
+        view.getNumberDialogFragment();
+    }
+
+    public void onCancelCounter(){
+        setBooleanInit(false);
+        view.setButtonsInvisible();
+        toastTimeStampCancel();
+        resetCounter();
+    }
+
+    public void onSaveCounter(){
+        setBooleanInit(false);
+        getModelCounter().insertDatabase();
+        view.setButtonsInvisible();
+        toastTimeStampSave();
+        resetCounter();
     }
 
     @Override
     public int getCounterType() {
-        return 1;
+        return 3;
     }
 
     public interface View {
         void refreshTextViewCounter(String stringCounterFormat);
 
-        int getNumberDialogFragment();
+        void getNumberDialogFragment();
 
-        void setTextTotal(int intCounterSet);
+        int getTextTotal();
+
+        void setButtonsVisible();
+
+        void setButtonsInvisible();
     }
 
 }

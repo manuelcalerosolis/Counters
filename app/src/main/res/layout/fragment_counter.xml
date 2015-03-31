@@ -19,13 +19,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButtonStop"
-            android:src="@android:drawable/ic_delete"
+            android:src="@drawable/cancel_icon"
             android:background="@null"
             android:focusableInTouchMode="false"
             android:padding="5dp"
             android:focusable="false"
             android:visibility="visible" />
-
 
         <TextView
             android:id="@+id/textViewSaveCounter"
@@ -33,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@string/save_counter"
             android:layout_marginRight="5dip"
-            android:textSize="20dip"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:gravity="right"
             android:textAlignment="gravity"

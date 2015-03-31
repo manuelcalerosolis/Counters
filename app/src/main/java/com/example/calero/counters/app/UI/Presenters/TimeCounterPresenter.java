@@ -4,6 +4,8 @@ import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.UI.Fragments.Counters.TimeCounterFragment;
 
+// TODO No se imprime bien el tiempo cdo se voltea el dispositivo
+
 public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
 
     private View view;
@@ -37,6 +39,15 @@ public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
 
     public void onStart(){
         super.onStart();
+        view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
+    }
+
+    public void saveCounter() {
+        if (isBooleanInit()) {
+            getModelCounter().insertDatabase();
+        }
+        resetCounter();
+        toastTimeStampSave();
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
 
