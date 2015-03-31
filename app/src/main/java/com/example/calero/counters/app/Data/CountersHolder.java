@@ -53,7 +53,7 @@ public class CountersHolder {
 
         if (columnStart != -1 && columnStop != -1) {
             textViewMinutes.setText(
-                    UtilDate.getMinutesDifference(
+                    UtilDate.getMinutesAndSecondsDifference(
                             cursor.getString(columnStart), cursor.getString(columnStop)) + " min");
         }
     }

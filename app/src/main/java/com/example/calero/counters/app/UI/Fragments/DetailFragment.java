@@ -64,6 +64,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private TextView typeTextView;
     private TextView friendlyDateTextView;
     private TextView elapsedDateTextView;
+    private TextView minutesTextView;
     private ImageView iconImageView;
 
     public DetailFragment() {
@@ -83,6 +84,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         friendlyDateTextView = (TextView) rootView.findViewById(R.id.detail_day_textview);
         elapsedDateTextView = (TextView) rootView.findViewById(R.id.detail_dates_textview);
+        minutesTextView = (TextView) rootView.findViewById(R.id.detail_minutes_textview);
         countedTextView = (TextView) rootView.findViewById(R.id.detail_counted_textview);
         typeTextView = (TextView) rootView.findViewById(R.id.detail_type_textview);
         iconImageView = (ImageView) rootView.findViewById(R.id.detail_icon_imageview);
@@ -163,10 +165,13 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                 try {
                     friendlyDateTextView.setText(
                         UtilDate.getFormattedMonthDay(
-                            cursor.getString(columnIndexStart)));
+                                cursor.getString(columnIndexStart)));
                     elapsedDateTextView.setText(
                         UtilDate.getDateInLine(
-                            cursor.getString(columnIndexStart), cursor.getString(columnIndexStop) ));
+                                cursor.getString(columnIndexStart), cursor.getString(columnIndexStop)));
+                    minutesTextView.setText(
+                        UtilDate.getMinutesAndSecondsDifference(
+                            cursor.getString(columnIndexStart), cursor.getString(columnIndexStop)) + " min");
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

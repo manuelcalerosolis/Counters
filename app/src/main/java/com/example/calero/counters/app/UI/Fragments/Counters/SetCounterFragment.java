@@ -133,6 +133,7 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
 
     public void getNumberDialogFragment(){
         NumberDialog numberDialog = new NumberDialog();
+        numberDialog.setEditTextSet(textViewSet);
         numberDialog.show(getFragmentManager(), "");
     }
 
@@ -142,9 +143,14 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
             textViewCounter.setText(stringCounterFormat);
     }
 
-    public class NumberDialog extends DialogFragment {
+    public static class NumberDialog extends DialogFragment {
 
+        TextView textViewSet;
         EditText editTextTotal;
+
+        public void setEditTextSet(TextView textViewSet){
+            this.textViewSet = textViewSet;
+        }
 
         @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         @Override
@@ -160,15 +166,15 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
             editTextTotal = (EditText) numberDialog.findViewById(R.id.numberInput);
 
             builder.setMessage(R.string.dialog_text)
-                    .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            textViewSet.setText( editTextTotal.getText().toString() );
-                        }
-                    })
-                    .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                        }
-                    });
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        textViewSet.setText( editTextTotal.getText().toString() );
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
             return builder.create();
         }
 

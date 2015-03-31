@@ -42,5 +42,11 @@
     <string name="tomorrow">mañana</string>
     <string name="tv_label">insert top number</string>
     <string name="dialog_text">Counter set</string>
+    <string name="action_settings">Configuración</string>
+    <string name="dialog_ok">aceptar</string>
+    <string name="dialog_cancel">cancelar</string>
+
+
+
 
 </resources>

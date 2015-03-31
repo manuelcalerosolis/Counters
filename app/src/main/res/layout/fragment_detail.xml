@@ -28,6 +28,15 @@
             android:layout_width="wrap_content"
             android:textSize="16sp" />
 
+        <TextView
+            android:text="Minutes"
+            android:fontFamily="sans-serif-condensed"
+            android:id="@+id/detail_minutes_textview"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="16sp" />
+
+
         <LinearLayout
             android:gravity="center_horizontal"
             android:orientation="horizontal"
