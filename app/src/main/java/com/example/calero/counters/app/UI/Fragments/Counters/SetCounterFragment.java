@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.UI.Presenters.SetCounterPresenter;
-import com.example.calero.counters.app.Utils.NumberDialogFragment;
 
 //TODO Comprobar el counter set si toma los valores del dialogo
 

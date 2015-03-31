@@ -1,19 +1,15 @@
 package com.example.calero.counters.app.Data;
 
 import android.database.Cursor;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.Utils.UtilApplication;
+import com.example.calero.counters.app.Utils.UtilDate;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 public class CountersHolder {
 
@@ -22,13 +18,15 @@ public class CountersHolder {
     TextView textViewCounter;
     TextView textViewName;
     ImageView imageViewType;
-    TextView textViewDuration;
+    TextView textViewMinutes;
+    TextView textViewDates;
 
     CountersHolder(View row) {
         this.imageViewType = (ImageView) row.findViewById(R.id.iconTypeCounter);
         this.textViewCounter = (TextView) row.findViewById(R.id.list_item_counter_textview);
         this.textViewName = (TextView) row.findViewById(R.id.list_item_name_textview);
-        this.textViewDuration = (TextView) row.findViewById(R.id.list_item_duration_textview);
+        this.textViewDates = (TextView) row.findViewById(R.id.list_item_dates_textview);
+        this.textViewMinutes = (TextView) row.findViewById(R.id.list_item_duration_textview);
     }
 
     public void setImageViewTypeFromCursor(Cursor cursor){
@@ -50,62 +48,41 @@ public class CountersHolder {
     }
 
     public void setTextViewDurationFromCursor(Cursor cursor) throws ParseException {
-
-        int minutes = 0;
         int columnStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
         int columnStop = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STOP);
 
-        try {
-            if (columnStart != -1 && columnStop != -1) {
-
-                SimpleDateFormat simpleDateFormatStart = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                Date dateStart = simpleDateFormatStart.parse(cursor.getString(columnStart));
-
-                SimpleDateFormat simpleDateFormatStop = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                Date dateStop = simpleDateFormatStop.parse(cursor.getString(columnStop));
-
-                minutes = (int) (TimeUnit.MILLISECONDS.toMinutes(dateStart.getTime())) - (int) (TimeUnit.MILLISECONDS.toMinutes(dateStop.getTime()));
-
-            }
+        if (columnStart != -1 && columnStop != -1) {
+            textViewMinutes.setText(
+                    UtilDate.getMinutesDifference(
+                            cursor.getString(columnStart), cursor.getString(columnStop)) + " min");
         }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-
-        textViewDuration.setText( String.valueOf(minutes) + " min");
     }
 
     public void setTextViewDatesIntervalFromCursor(Cursor cursor) throws ParseException {
 
-        String datesInterval = "Parse error";
         int columnStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
         int columnStop = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STOP);
 
-        Log.d(LOG_TAG, "FroM SQLLite " + cursor.getString(columnStart));
-
-        try {
-            if (columnStart != -1 && columnStop != -1) {
-
-                SimpleDateFormat simpleDateFormatStart = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm:ss", Locale.US) ;// EEE, d MMM yyyy, HH:mm" ); // hh:mm:ss");
-                Date dateStart = simpleDateFormatStart.parse(cursor.getString(columnStart));
-
-                Log.d(LOG_TAG, "Date start " +  dateStart.toString());
-                Log.d(LOG_TAG, "FroM SQLLite " + cursor.getString(columnStart));
-
+        if (columnStart != -1 && columnStop != -1) {
+            textViewName.setText(
+                UtilDate.getFormattedMonthDay(
+                        cursor.getString(columnStart)));
 //                SimpleDateFormat simpleDateFormatStop = new SimpleDateFormat("HH:mm:ss");
 //                Date dateStop = simpleDateFormatStop.parse(cursor.getString(columnStop));
 
-                datesInterval = dateStart.toString(); // + " " + dateStop.toString();
-
-            }
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
         }
 
-        textViewName.setText( datesInterval);
+    }
+
+    public void setTextViewDatesFromCursor(Cursor cursor) throws ParseException {
+        int columnStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
+        int columnStop = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STOP);
+
+        if (columnStart != -1 && columnStop != -1) {
+            textViewDates.setText(
+                    UtilDate.getDateInLine(
+                            cursor.getString(columnStart), cursor.getString(columnStop)));
+        }
     }
 
 

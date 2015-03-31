@@ -35,6 +35,7 @@
     <string name="duration_counter">Duración</string>
     <string name="fragment_counter_set">Counter set</string>
     <string name="fragment_counter_data">Counters data</string>
+    <string name="title_activity_detail">Counters detalle</string>
     <string name="action_share">Compartir</string>
     <string name="preference_minutes_label">minutes</string>
     <string name="today">hoy</string>

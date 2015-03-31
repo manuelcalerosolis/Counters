@@ -40,6 +40,14 @@
 
         <TextView
             android:text="duration"
+            android:id="@+id/list_item_dates_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:textAppearanceSmall"/>
+
+        <TextView
+            android:text="minutes"
             android:id="@+id/list_item_duration_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

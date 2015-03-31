@@ -10,39 +10,56 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by calero on 24/03/2015.
  */
 public class UtilDate {
 
-    public static String getFormattedMonthDay(String timeStampText) {
-
-        Date date;
-        String monthDayString = "";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        try {
-            date = simpleDateFormat.parse(timeStampText);
-            monthDayString = (String) android.text.format.DateFormat.format("EEEE", date);
-            monthDayString += " ";
-            monthDayString += (String) android.text.format.DateFormat.format("dd", date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return monthDayString;
-    }
-
     public static final String DATE_FORMAT = "ddMMyyyy";
 
-    public static Date getTimeStampFromString(String timeStampText) {
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        try {
-            date = simpleDateFormat.parse(timeStampText);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
+    protected static Date getDateFromString(String timeStamp) throws ParseException {
+        SimpleDateFormat simpleDateFormatStart = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        return (simpleDateFormatStart.parse(timeStamp));
     }
+
+    public static String getFormattedMonthDay(String timeStampText) throws ParseException {
+        Date date = getDateFromString(timeStampText);
+        return  android.text.format.DateFormat.format("EEEE", date) + " " +
+                android.text.format.DateFormat.format("dd", date) + " " +
+                android.text.format.DateFormat.format("MMMM", date);
+    }
+
+    public static int getMinutesDifference(String timeStampTextStart, String timeStampTextEnd) throws ParseException {
+        Date dateStart = getDateFromString(timeStampTextStart);
+        Date dateStop = getDateFromString(timeStampTextEnd);
+        return ( (int) (TimeUnit.MILLISECONDS.toMinutes(dateStart.getTime())) - (int) (TimeUnit.MILLISECONDS.toMinutes(dateStop.getTime())) );
+    }
+
+    public static String getDateInLine(String timeStampTextStart, String timeStampTextEnd) throws ParseException {
+        String dateString = "";
+        Date dateStart = getDateFromString(timeStampTextStart);
+        Date dateEnd = getDateFromString(timeStampTextEnd);
+        dateString =    android.text.format.DateFormat.format("dd", dateStart) + "/" +
+                        android.text.format.DateFormat.format("mm", dateStart) + "/" +
+                        android.text.format.DateFormat.format("yyyy", dateStart) + " " +
+                        android.text.format.DateFormat.format("hh:mm:ss", dateStart) + " to " +
+                        android.text.format.DateFormat.format("hh:mm:ss", dateEnd);
+
+//        SimpleDateFormat simpleDateFormatStop = new SimpleDateFormat(" HH:mm:ss");
+//        Date dateStop = simpleDateFormatStop.parse(timeStampTextEnd);
+
+        return ( dateString );
+    }
+
+
+    public static String getTimeStampFromString(String timeStampText) throws ParseException {
+        Date date = new Date();
+        date = getDateFromString(timeStampText);
+        return date.toString();
+    }
+
+
 
 }

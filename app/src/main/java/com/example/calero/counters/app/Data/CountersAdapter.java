@@ -33,9 +33,9 @@ public class CountersAdapter extends CursorAdapter {
         CountersHolder countersHolder = (CountersHolder) view.getTag();
         countersHolder.setImageViewTypeFromCursor(cursor);
         countersHolder.setTextViewCounterFromCursor(cursor);
-
         try {
             countersHolder.setTextViewDatesIntervalFromCursor(cursor);
+            countersHolder.setTextViewDatesFromCursor(cursor);
             countersHolder.setTextViewDurationFromCursor(cursor);
         } catch (ParseException e) {
             e.printStackTrace();

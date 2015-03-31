@@ -40,6 +40,8 @@ import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.Utils.UtilApplication;
 import com.example.calero.counters.app.Utils.UtilDate;
 
+import java.text.ParseException;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -139,25 +141,35 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         if (cursor != null && cursor.moveToFirst()) {
 
-            int columnIndex;
+            int columnIndexStart;
+            int columnIndexStop;
 
-            columnIndex = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_COUNTED);
-            if (columnIndex != -1)
-                countedTextView.setText(cursor.getString(columnIndex));
+            columnIndexStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_COUNTED);
+            if (columnIndexStart != -1)
+                countedTextView.setText(cursor.getString(columnIndexStart));
 
-            columnIndex = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_TYPE);
-            if (columnIndex != -1) {
-                iconImageView.setImageResource(UtilApplication.getArtResourceForCounterType(cursor.getInt(columnIndex)));
-                typeTextView.setText(UtilApplication.getTextResourceForCounterType(cursor.getInt(columnIndex)));
+            columnIndexStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_TYPE);
+            if (columnIndexStart != -1) {
+                iconImageView.setImageResource(UtilApplication.getArtResourceForCounterType(cursor.getInt(columnIndexStart)));
+                typeTextView.setText(
+                    UtilApplication.getTextResourceForCounterType(
+                        cursor.getInt(columnIndexStart)));
             }
 
-            columnIndex = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
-            if (columnIndex != -1){
-                String dateText = cursor.getString(columnIndex);
+            columnIndexStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
+            columnIndexStop = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STOP);
 
-                elapsedDateTextView.setText(UtilDate.getTimeStampFromString(dateText).toString());
-
-                friendlyDateTextView.setText(UtilDate.getFormattedMonthDay(dateText));
+            if (columnIndexStart != -1 && columnIndexStop != -1){
+                try {
+                    friendlyDateTextView.setText(
+                        UtilDate.getFormattedMonthDay(
+                            cursor.getString(columnIndexStart)));
+                    elapsedDateTextView.setText(
+                        UtilDate.getDateInLine(
+                            cursor.getString(columnIndexStart), cursor.getString(columnIndexStop) ));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
             // Shared information
