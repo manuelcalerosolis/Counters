@@ -31,20 +31,27 @@ public class CountersHolder {
 
     public void setImageViewTypeFromCursor(Cursor cursor){
         int columnType = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_TYPE);
+
         if (columnType != -1)
-            imageViewType.setImageResource(UtilApplication.getArtResourceForCounterType(cursor.getInt(columnType)));
+            imageViewType.setImageResource(
+                UtilApplication.getArtResourceForCounterType(
+                    cursor.getInt(columnType)));
     }
 
     public void setTextViewNameFromCursor(Cursor cursor){
         int columnName = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_TYPE);
+
         if (columnName != -1)
-            textViewName.setText(cursor.getString(columnName));
+            textViewName.setText(
+                cursor.getString(columnName));
     }
 
     public void setTextViewCounterFromCursor(Cursor cursor){
         int columnCounted = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_COUNTED);
+
         if (columnCounted != -1)
-            textViewCounter.setText(cursor.getString(columnCounted));
+            textViewCounter.setText(
+                cursor.getString(columnCounted));
     }
 
     public void setTextViewDurationFromCursor(Cursor cursor) throws ParseException {
@@ -53,25 +60,20 @@ public class CountersHolder {
 
         if (columnStart != -1 && columnStop != -1) {
             textViewMinutes.setText(
-                    UtilDate.getMinutesAndSecondsDifference(
-                            cursor.getString(columnStart), cursor.getString(columnStop)) + " min");
+                UtilDate.getMinutesAndSecondsDifference(
+                    cursor.getString(columnStart), cursor.getString(columnStop)));
         }
     }
 
     public void setTextViewDatesIntervalFromCursor(Cursor cursor) throws ParseException {
-
         int columnStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STAR);
         int columnStop = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_STOP);
 
         if (columnStart != -1 && columnStop != -1) {
             textViewName.setText(
                 UtilDate.getFormattedMonthDay(
-                        cursor.getString(columnStart)));
-//                SimpleDateFormat simpleDateFormatStop = new SimpleDateFormat("HH:mm:ss");
-//                Date dateStop = simpleDateFormatStop.parse(cursor.getString(columnStop));
-
+                    cursor.getString(columnStart)));
         }
-
     }
 
     public void setTextViewDatesFromCursor(Cursor cursor) throws ParseException {
@@ -80,10 +82,9 @@ public class CountersHolder {
 
         if (columnStart != -1 && columnStop != -1) {
             textViewDates.setText(
-                    UtilDate.getDateInLine(
-                            cursor.getString(columnStart), cursor.getString(columnStop)));
+                UtilDate.getDateInLine(
+                    cursor.getString(columnStart), cursor.getString(columnStop)));
         }
     }
-
 
 }

@@ -38,6 +38,9 @@
             android:authorities="com.example.calero.counters.app"
             android:name=".Data.CountersProvider" />
 
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>

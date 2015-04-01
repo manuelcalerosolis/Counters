@@ -2,6 +2,7 @@ package com.example.calero.counters.app.UI.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -15,10 +16,16 @@ import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.UI.Fragments.DataFragment;
 import com.example.calero.counters.app.UI.Tabs.TabListener;
 import com.example.calero.counters.app.UI.ViewPagers.ViewPagerAdapter;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
-public class MainActivity extends ActionBarActivity implements DataFragment.Callback { // FragmentActivity{
+public class MainActivity extends ActionBarActivity implements DataFragment.Callback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener { // FragmentActivity{
 
     private static Context context;
+    protected GoogleApiClient googleApiClient;
+    protected Location lastLocation;
+
 //    private final ActionBar actionBar = getSupportActionBar();
 
     @Override
@@ -79,6 +86,28 @@ public class MainActivity extends ActionBarActivity implements DataFragment.Call
         toast.show( );
     }
 
+    protected synchronized void buildGoogleApiClient() {
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        if (lastLocation != null) {
+//            lmLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+//            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -90,5 +119,10 @@ public class MainActivity extends ActionBarActivity implements DataFragment.Call
         Intent intent = new Intent(this, DetailActivity.class);
             intent.setData(contentUri);
             startActivity(intent);
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 }

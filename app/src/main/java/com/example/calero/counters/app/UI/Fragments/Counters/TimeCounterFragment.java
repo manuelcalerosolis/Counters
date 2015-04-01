@@ -19,6 +19,8 @@ import com.example.calero.counters.app.UI.Presenters.TimeCounterPresenter;
 
 import java.util.concurrent.TimeUnit;
 
+//TODO volver atras el timer cuando termine tras la grabacion.
+
 public class TimeCounterFragment extends BaseFragmentCounter implements TimeCounterPresenter.View{
 
     TextView textViewTimer;

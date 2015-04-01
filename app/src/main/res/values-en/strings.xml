@@ -45,5 +45,7 @@
     <string name="dialog_text">Counter set</string>
     <string name="dialog_ok">ok</string>
     <string name="dialog_cancel">cancel</string>
+    <string name="minutes">min</string>
+    <string name="seconds">sec</string>
 
 </resources>

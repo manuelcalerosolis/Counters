@@ -45,8 +45,8 @@
     <string name="action_settings">Configuración</string>
     <string name="dialog_ok">aceptar</string>
     <string name="dialog_cancel">cancelar</string>
-
-
+    <string name="minutes">min</string>
+    <string name="seconds">seg</string>
 
 
 </resources>

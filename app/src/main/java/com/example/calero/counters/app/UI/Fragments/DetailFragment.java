@@ -171,7 +171,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                                 cursor.getString(columnIndexStart), cursor.getString(columnIndexStop)));
                     minutesTextView.setText(
                         UtilDate.getMinutesAndSecondsDifference(
-                            cursor.getString(columnIndexStart), cursor.getString(columnIndexStop)) + " min");
+                                cursor.getString(columnIndexStart), cursor.getString(columnIndexStop)));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

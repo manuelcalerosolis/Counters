@@ -118,7 +118,7 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
 
     @Override
     protected int getFragmentLayout() {
-        return R.layout.fragment_counter;
+        return R.layout.fragment_only_counter;
     }
 
     @Override

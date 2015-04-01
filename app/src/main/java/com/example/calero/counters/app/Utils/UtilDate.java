@@ -5,6 +5,7 @@ import android.text.format.Time;
 import android.util.Log;
 
 import com.example.calero.counters.app.R;
+import com.example.calero.counters.app.UI.Activities.MainActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,29 +25,47 @@ public class UtilDate {
         return (simpleDateFormatStart.parse(timeStamp));
     }
 
-    public static String getFormattedMonthDay(String timeStampText) throws ParseException {
+    public static CharSequence getFormattedMonthDay(String timeStampText) throws ParseException {
         Date date = getDateFromString(timeStampText);
-        return  android.text.format.DateFormat.format("EEEE", date) + " " +
-                android.text.format.DateFormat.format("dd", date) + " " +
-                android.text.format.DateFormat.format("MMMM", date);
+        return android.text.format.DateFormat.format("EEEE dd MMMM", date);
     }
 
-    public static int getMinutesAndSecondsDifference(String timeStampTextStart, String timeStampTextEnd) throws ParseException {
+    public static int getMinutesDifference(String timeStampTextStart, String timeStampTextEnd) throws ParseException {
+        int minutesDifference;
         Date dateStart = getDateFromString(timeStampTextStart);
         Date dateStop = getDateFromString(timeStampTextEnd);
-        return ( (int) (TimeUnit.MILLISECONDS.toMinutes(dateStart.getTime())) - (int) (TimeUnit.MILLISECONDS.toMinutes(dateStop.getTime())) );
+        minutesDifference = (int) (TimeUnit.MILLISECONDS.toMinutes(dateStart.getTime())) - (int) (TimeUnit.MILLISECONDS.toMinutes(dateStop.getTime()));
+        return ( minutesDifference );
     }
 
-    public static String getDateInLine(String timeStampTextStart, String timeStampTextEnd) throws ParseException {
-        String dateString = "";
+    public static long getSecondsDifference(String timeStampTextStart, String timeStampTextEnd) throws ParseException {
+        long secondsDifference;
+        Date dateStart = getDateFromString(timeStampTextStart);
+        Date dateStop = getDateFromString(timeStampTextEnd);
+        secondsDifference = (TimeUnit.MILLISECONDS.toSeconds(dateStart.getTime())) - (TimeUnit.MILLISECONDS.toSeconds(dateStop.getTime()));
+        secondsDifference = secondsDifference % 60;
+        return ( secondsDifference );
+    }
+
+    public static CharSequence getMinutesAndSecondsDifference(String timeStampTextStart, String timeStampTextEnd) throws ParseException {
+        long seconds = 0;
+        CharSequence minutesAndSeconds;
+        seconds = getSecondsDifference(timeStampTextStart, timeStampTextEnd );
+        if (seconds == 0)
+            minutesAndSeconds = getMinutesDifference(timeStampTextStart, timeStampTextEnd) + MainActivity.getAppContext().getString(R.string.minutes);
+        else
+            minutesAndSeconds = getMinutesDifference(timeStampTextStart, timeStampTextEnd) + MainActivity.getAppContext().getString(R.string.minutes) + " " +
+                seconds + MainActivity.getAppContext().getString(R.string.seconds);
+        return (minutesAndSeconds);
+    }
+
+    public static CharSequence getDateInLine(String timeStampTextStart, String timeStampTextEnd) throws ParseException {
+        CharSequence dateString = "";
         Date dateStart = getDateFromString(timeStampTextStart);
         Date dateEnd = getDateFromString(timeStampTextEnd);
-        dateString =    android.text.format.DateFormat.format("dd", dateStart) + "/" +
-                        android.text.format.DateFormat.format("mm", dateStart) + "/" +
-                        android.text.format.DateFormat.format("yyyy", dateStart) + " " +
-                        android.text.format.DateFormat.format("hh:mm:ss", dateStart) + " to " +
-                        android.text.format.DateFormat.format("hh:mm:ss", dateEnd);
-        return ( dateString );
+        dateString = android.text.format.DateFormat.format("dd/MM/yyyy hh:mm:ss", dateStart) + " to " +
+            android.text.format.DateFormat.format("hh:mm:ss", dateEnd);
+        return (dateString);
     }
 
 
