@@ -50,6 +50,7 @@
     <string name="minutes">min</string>
     <string name="seconds">sec</string>
 
-    <string name="format_latitude">Latitude : <xliff:g id="latitude">%1.0f</xliff:g> %%</string>
+    <string name="format_latitude">Latitude : <xliff:g id="latitude">%1$.6f</xliff:g>º</string>
+    <string name="format_longitude">Longitude : <xliff:g id="longitude">%1$.6f</xliff:g>º</string>
 
 </resources>

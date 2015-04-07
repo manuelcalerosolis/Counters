@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <string name="app_name">Counters</string>
     <string name="hello_world">Hola mundo!</string>
@@ -30,23 +30,25 @@
     <string name="counter_time_tab">Tiempo</string>
     <string name="data_tab">Datos</string>
     <string name="minus_counter">MENOS</string>
-    <string name="plus_counter">PLUS</string>
+    <string name="plus_counter">MAS</string>
     <string name="textView">textView</string>
     <string name="duration_counter">Duración</string>
-    <string name="fragment_counter_set">Counter set</string>
-    <string name="fragment_counter_data">Counters data</string>
-    <string name="title_activity_detail">Counters detalle</string>
+    <string name="fragment_counter_set">Contador objetivo</string>
+    <string name="fragment_counter_data">Datos</string>
+    <string name="title_activity_detail">Conteo detalle</string>
     <string name="action_share">Compartir</string>
     <string name="preference_minutes_label">minutes</string>
     <string name="today">hoy</string>
     <string name="tomorrow">mañana</string>
     <string name="tv_label">insert top number</string>
-    <string name="dialog_text">Counter set</string>
+    <string name="dialog_text">Contador objetivo</string>
     <string name="action_settings">Configuración</string>
     <string name="dialog_ok">aceptar</string>
     <string name="dialog_cancel">cancelar</string>
     <string name="minutes">min</string>
     <string name="seconds">seg</string>
 
+    <string name="format_latitude">Latitud : <xliff:g id="latitude">%1$.6f</xliff:g>º</string>
+    <string name="format_longitude">Longitud : <xliff:g id="longitude">%1$.6f</xliff:g>º</string>
 
 </resources>

@@ -235,15 +235,15 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
             columnIndexStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_LATITUDE);
             if (columnIndexStart != -1)
-            latitudeTextView.setText(
-                getActivity().getString(
-                    R.string.format_latitude, cursor.getDouble(columnIndexStart)));
-
-//            latitudeTextView.setText(String.valueOf(cursor.getDouble(columnIndexStart)));
+                latitudeTextView.setText(
+                    getActivity().getString(
+                        R.string.format_latitude, cursor.getDouble(columnIndexStart)));
 
             columnIndexStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_LONGITUDE);
             if (columnIndexStart != -1)
-                longitudeTextView.setText(String.valueOf(cursor.getDouble(columnIndexStart)));
+                longitudeTextView.setText(
+                    getActivity().getString(
+                        R.string.format_longitude, cursor.getDouble(columnIndexStart)));
 
             // Shared information--------------------------------------------
 

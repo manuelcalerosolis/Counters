@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <string name="app_name">Counters</string>
     <string name="hello_world">Hello world!</string>
@@ -47,5 +47,8 @@
     <string name="dialog_cancel">cancel</string>
     <string name="minutes">min</string>
     <string name="seconds">sec</string>
+
+    <string name="format_latitude">Latitude : <xliff:g id="latitude">%1$.6f</xliff:g>º</string>
+    <string name="format_longitude">Longitude : <xliff:g id="longitude">%1$.6f</xliff:g>º</string>
 
 </resources>
