@@ -50,6 +50,8 @@ public class CountersContract {
         public static final String COLUMN_TYPE = "type";
         public static final String COLUMN_STAR = "star";
         public static final String COLUMN_STOP = "stop";
+        public static final String COLUMN_LATITUDE = "latitude";
+        public static final String COLUMN_LONGITUDE = "longitude";
 
         public static final String[] COUNTERS_COLUMNS = {
                 TABLE_NAME + "." + COLUMN_ID,
@@ -57,7 +59,9 @@ public class CountersContract {
                 COLUMN_COUNTED,
                 COLUMN_TYPE,
                 COLUMN_STAR,
-                COLUMN_STOP
+                COLUMN_STOP,
+                COLUMN_LATITUDE,
+                COLUMN_LONGITUDE
         };
 
         public static Uri buildCuntersUri(long id) {

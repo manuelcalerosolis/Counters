@@ -26,6 +26,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,10 +38,12 @@ import android.widget.TextView;
 
 import com.example.calero.counters.app.Data.CountersContract;
 import com.example.calero.counters.app.R;
+import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.Utils.UtilApplication;
 import com.example.calero.counters.app.Utils.UtilDate;
 
 import java.text.ParseException;
+import java.util.Locale;
 
 
 /**
@@ -65,7 +68,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private TextView friendlyDateTextView;
     private TextView elapsedDateTextView;
     private TextView minutesTextView;
+    private TextView latitudeTextView;
+    private TextView longitudeTextView;
     private ImageView iconImageView;
+    private ImageView mapImageView;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -88,8 +94,58 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         countedTextView = (TextView) rootView.findViewById(R.id.detail_counted_textview);
         typeTextView = (TextView) rootView.findViewById(R.id.detail_type_textview);
         iconImageView = (ImageView) rootView.findViewById(R.id.detail_icon_imageview);
+        latitudeTextView = (TextView) rootView.findViewById(R.id.detail_latitude_textview);
+        longitudeTextView = (TextView) rootView.findViewById(R.id.detail_longitude_textview);
+        mapImageView = (ImageView) rootView.findViewById(R.id.detail_map_imageview);
+        mapImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMapView();
+            }
+        });
 
         return rootView;
+    }
+
+    public double getDoubleLatitudeTextView() {
+        double latitude = 0;
+        latitude = Double.parseDouble(latitudeTextView.getText().toString());
+        return latitude;
+    }
+
+    public double getDoubleLongitudeTextView() {
+        double longitude = 0;
+        longitude = Double.parseDouble(longitudeTextView.getText().toString());
+        return longitude;
+    }
+
+    public String getStringLatitudeTextView() {
+        return latitudeTextView.getText().toString();
+    }
+
+    public String getStringLongitudeTextView() {
+        return longitudeTextView.getText().toString();
+    }
+
+
+    private void openMapView() {
+        if ( getDoubleLatitudeTextView() != 0 || getDoubleLongitudeTextView() != 0 ) {
+            Uri uri = Uri.parse("geo:" + getStringLatitudeTextView() + "," + getStringLongitudeTextView());
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(uri);
+
+            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                Log.d(LOG_TAG, "Couldn't call " + uri.toString() + ", no receiving apps installed!");
+            }
+        }
+        else
+        {
+            Log.d(LOG_TAG, "URI " + uri);
+            Log.d(LOG_TAG, "Latitude " + latitudeTextView.getText().toString());
+            Log.d(LOG_TAG, "Longitude " + longitudeTextView.getText().toString());
+        }
     }
 
     @Override
@@ -168,16 +224,28 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                                 cursor.getString(columnIndexStart)));
                     elapsedDateTextView.setText(
                         UtilDate.getDateInLine(
-                                cursor.getString(columnIndexStart), cursor.getString(columnIndexStop)));
+                            cursor.getString(columnIndexStart), cursor.getString(columnIndexStop)));
                     minutesTextView.setText(
                         UtilDate.getMinutesAndSecondsDifference(
-                                cursor.getString(columnIndexStart), cursor.getString(columnIndexStop)));
+                            cursor.getString(columnIndexStart), cursor.getString(columnIndexStop)));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
 
-            // Shared information
+            columnIndexStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_LATITUDE);
+            if (columnIndexStart != -1)
+            latitudeTextView.setText(
+                getActivity().getString(
+                    R.string.format_latitude, cursor.getDouble(columnIndexStart)));
+
+//            latitudeTextView.setText(String.valueOf(cursor.getDouble(columnIndexStart)));
+
+            columnIndexStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_LONGITUDE);
+            if (columnIndexStart != -1)
+                longitudeTextView.setText(String.valueOf(cursor.getDouble(columnIndexStart)));
+
+            // Shared information--------------------------------------------
 
             counters = String.format("%s - %s", typeTextView.getText(), countedTextView.getText());
             if (shareActionProvider != null) {

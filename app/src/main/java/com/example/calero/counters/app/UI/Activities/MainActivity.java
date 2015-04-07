@@ -3,11 +3,14 @@ package com.example.calero.counters.app.UI.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.widget.Toast;
@@ -20,11 +23,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
-public class MainActivity extends ActionBarActivity implements DataFragment.Callback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener { // FragmentActivity{
+public class MainActivity extends ActionBarActivity implements DataFragment.Callback {
 
     private static Context context;
-    protected GoogleApiClient googleApiClient;
-    protected Location lastLocation;
+    private static LocationManager locationManager;
+    private static Location location;
+    private LocationListener locationListener;
 
 //    private final ActionBar actionBar = getSupportActionBar();
 
@@ -74,6 +78,8 @@ public class MainActivity extends ActionBarActivity implements DataFragment.Call
                         .setIcon(R.drawable.fragment_counter_data)
                         .setTabListener(tabListener));
 
+        getLocation();
+
     }
 
     public static Context getAppContext() {
@@ -83,29 +89,62 @@ public class MainActivity extends ActionBarActivity implements DataFragment.Call
     public static void showAppToast(int resourceId ){
         Toast toast = Toast.makeText(getAppContext(), resourceId, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show( );
+        toast.show();
     }
 
-    protected synchronized void buildGoogleApiClient() {
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
+    public void getLocation() {
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        showLocation();
+
+        locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+//                showLocation();
+            }
+            public void onProviderDisabled(String provider){
+            }
+            public void onProviderEnabled(String provider){
+            }
+            public void onStatusChanged(String provider, int status, Bundle extras){
+                Log.d("GEO", "Provider Status: " + status);
+            }
+        };
+
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 30000, 0, locationListener);
     }
 
-    @Override
-    public void onConnected(Bundle connectionHint) {
-        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-        if (lastLocation != null) {
-//            lmLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-//            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+    public static double getLocationLatitude(){
+        double locationLatitude = 0;
+        if (location != null )
+            locationLatitude = location.getLatitude();
+        Log.d("GEO", "Latitud: " + String.valueOf(locationLatitude));
+        return (locationLatitude);
+    }
+
+    public static double getLocationLongitude(){
+        double locationLongitude = 0;
+        if (location != null )
+            locationLongitude = location.getLongitude();
+        Log.d("GEO", "Longitud: " + String.valueOf(locationLongitude));
+        return (locationLongitude);
+    }
+
+    private void showLocation() {
+        if(location != null)
+        {
+            Log.d("GEO", "Latitud: " + String.valueOf(location.getLatitude()));
+            Log.d("GEO", "Longitud: " + String.valueOf(location.getLongitude()));
+            Log.d("GEO", "Precision: " + String.valueOf(location.getAccuracy()));
+            Log.d("GEO", String.valueOf(location.getLatitude() + " - " + String.valueOf(location.getLongitude())));
         }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
+        else
+        {
+            Log.d("GEO", "Latitud: (sin_datos)");
+            Log.d("GEO", "Longitud: (sin_datos)");
+            Log.d("GEO", "Precision: (sin_datos)");
+        }
     }
 
     @Override
@@ -121,8 +160,4 @@ public class MainActivity extends ActionBarActivity implements DataFragment.Call
             startActivity(intent);
     }
 
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
 }

@@ -1,5 +1,7 @@
 package com.example.calero.counters.app.UI.Presenters;
 
+import com.example.calero.counters.app.UI.Activities.MainActivity;
+
 import java.util.Date;
 
 public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
@@ -42,6 +44,8 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
     public void startCounter(){
         setBooleanInit(true);
         getModelCounter().setTimeStampStart(new Date());
+        getModelCounter().setLocationLatitude(MainActivity.getLocationLatitude());
+        getModelCounter().setLocationLongitude(MainActivity.getLocationLongitude());
         toastTimeStampStart();
         view.showSaveAndCancel();
     }
