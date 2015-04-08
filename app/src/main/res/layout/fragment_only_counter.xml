@@ -4,6 +4,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/set_backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/set_background" />
+
     <LinearLayout
         android:id="@+id/linearLayoutStop"
         android:layout_width="fill_parent"

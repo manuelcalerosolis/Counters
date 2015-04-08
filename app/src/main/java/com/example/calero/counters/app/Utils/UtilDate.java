@@ -63,7 +63,8 @@ public class UtilDate {
         CharSequence dateString = "";
         Date dateStart = getDateFromString(timeStampTextStart);
         Date dateEnd = getDateFromString(timeStampTextEnd);
-        dateString = android.text.format.DateFormat.format("dd/MM/yyyy hh:mm:ss", dateStart) + " to " +
+        dateString = android.text.format.DateFormat.format("hh:mm:ss", dateStart) +
+            MainActivity.getAppContext().getString(R.string.to) +
             android.text.format.DateFormat.format("hh:mm:ss", dateEnd);
         return (dateString);
     }

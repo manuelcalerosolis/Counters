@@ -72,6 +72,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private TextView longitudeTextView;
     private ImageView iconImageView;
     private ImageView mapImageView;
+    private double latitudeValue = 0;
+    private double longitudeValue = 0;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -119,18 +121,17 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         return longitude;
     }
 
-    public String getStringLatitudeTextView() {
-        return latitudeTextView.getText().toString();
+    public String getStringLatitudeValue() {
+        return String.valueOf(latitudeValue);
     }
 
-    public String getStringLongitudeTextView() {
-        return longitudeTextView.getText().toString();
+    public String getStringLongitudeValue() {
+        return String.valueOf(longitudeValue);
     }
-
 
     private void openMapView() {
-        if ( getDoubleLatitudeTextView() != 0 || getDoubleLongitudeTextView() != 0 ) {
-            Uri uri = Uri.parse("geo:" + getStringLatitudeTextView() + "," + getStringLongitudeTextView());
+        if ( latitudeValue != 0 || latitudeValue != 0 ) {
+            Uri uri = Uri.parse("geo:" + getStringLatitudeValue() + "," + getStringLongitudeValue());
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(uri);
 
@@ -235,15 +236,17 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
             columnIndexStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_LATITUDE);
             if (columnIndexStart != -1)
+                latitudeValue = cursor.getDouble(columnIndexStart);
                 latitudeTextView.setText(
                     getActivity().getString(
-                        R.string.format_latitude, cursor.getDouble(columnIndexStart)));
+                        R.string.format_latitude, latitudeValue));
 
             columnIndexStart = cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_LONGITUDE);
             if (columnIndexStart != -1)
+                longitudeValue = cursor.getDouble(columnIndexStart);
                 longitudeTextView.setText(
                     getActivity().getString(
-                        R.string.format_longitude, cursor.getDouble(columnIndexStart)));
+                        R.string.format_longitude, longitudeValue));
 
             // Shared information--------------------------------------------
 

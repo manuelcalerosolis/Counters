@@ -47,7 +47,7 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         countersAdapter = new CountersAdapter(getActivity(), null, 0);
 
-        View view = inflater.inflate(R.layout.fragmentdata, container, false);
+        View view = inflater.inflate(R.layout.fragment_data, container, false);
 
         listViewData = (ListView) view.findViewById(R.id.listView);
         listViewData.setAdapter(countersAdapter);

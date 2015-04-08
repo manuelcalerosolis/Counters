@@ -50,5 +50,6 @@
 
     <string name="format_latitude">Latitude : <xliff:g id="latitude">%1$.6f</xliff:g>º</string>
     <string name="format_longitude">Longitude : <xliff:g id="longitude">%1$.6f</xliff:g>º</string>
+    <string name="to"> to </string>
 
 </resources>
