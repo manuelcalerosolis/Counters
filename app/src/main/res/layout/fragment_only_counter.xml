@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="false"
         android:scaleType="centerCrop"
-        android:src="@drawable/set_background" />
+        android:src="@drawable/only_background" />
 
     <LinearLayout
         android:id="@+id/linearLayoutStop"
