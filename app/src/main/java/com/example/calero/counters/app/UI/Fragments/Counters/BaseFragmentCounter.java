@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.calero.counters.app.R;
@@ -12,6 +13,7 @@ import com.example.calero.counters.app.UI.Fragments.BaseFragment;
 
 public abstract class BaseFragmentCounter extends BaseFragment {
 
+    ImageView imageViewBackground;
     TextView textViewCounter;
     ImageButton imageButtonMinus;
     ImageButton imageButtonPlus;
@@ -19,6 +21,7 @@ public abstract class BaseFragmentCounter extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+        imageViewBackground = (ImageView) view.findViewById(R.id.backgroundImage);
         textViewCounter = (TextView) view.findViewById(R.id.list_item_counter_textview);
         imageButtonPlus = (ImageButton) view.findViewById(R.id.imageButtonPlus);
         imageButtonMinus = (ImageButton) view.findViewById(R.id.imageButtonMinus);

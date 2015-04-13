@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:background="@drawable/app_vegetal_background">
+    android:layout_width="wrap_content" android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/set_backgroundImage"
+        android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="false"
@@ -17,8 +16,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutTime"
-        android:background="#C8292929"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:background="#c8292929">
 
         <LinearLayout
             android:orientation="vertical"

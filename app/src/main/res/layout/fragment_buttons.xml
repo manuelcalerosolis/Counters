@@ -1,53 +1,6 @@
-<!--<merge xmlns:android="http://schemas.android.com/apk/res/android">-->
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="center_vertical"-->
-        <!--android:gravity="end|center_horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="0000"-->
-            <!--android:id="@+id/list_item_counter_textview"-->
-            <!--android:textSize="100dp"-->
-            <!--android:textStyle="bold"-->
-            <!--android:paddingLeft="50dp"-->
-            <!--android:paddingRight="50dp"-->
-            <!--android:textColor="@color/primary_blue"-->
-            <!--android:textIsSelectable="false"-->
-            <!--android:layout_alignBottom="@+id/imageButtonMinus"-->
-            <!--android:layout_centerHorizontal="true" />-->
-
-        <!--<ImageButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/imageButtonMinus"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--style="@style/ButtonMinusStyle"-->
-            <!--android:layout_margin="20dp" />-->
-
-        <!--<ImageButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/imageButtonPlus"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--style="@style/ButtonPlusStyle"-->
-            <!--android:layout_margin="20dp" />-->
-
-    <!--</RelativeLayout>-->
-
-<!--</merge>-->
-
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
@@ -71,19 +24,20 @@
             android:layout_weight="0"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="0000"
             android:id="@+id/list_item_counter_textview"
             android:textSize="80dp"
             android:textStyle="bold"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
             android:textColor="@color/primary_blue"
             android:textIsSelectable="false"
             android:layout_gravity="center_horizontal"
             android:layout_above="@+id/imageButtonPlus"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerInParent="true" />
 
         <ImageButton
             style="@style/ButtonPlusStyle"
