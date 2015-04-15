@@ -8,7 +8,7 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
 
     private View view;
 
-    public void setView(View view) {
+    public void setView(View view){
         if (view == null) {
             throw new IllegalArgumentException("You can't set a null view");
         }
@@ -32,11 +32,12 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
         if (isBooleanInit())
             onCancelCounter();
         resetCounter();
+        view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
 
     public void onClickButtonSave(){
         if (isBooleanInit())
-            onSaveCounter();
+            saveCounter();
         resetCounter();
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
@@ -50,22 +51,27 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
         view.showSaveAndCancel();
     }
 
-    public void onSaveCounter(){
+    public void saveCounter(){
         setBooleanInit(false);
+        getModelCounter().setTimeStampStop(new Date());
         getModelCounter().insertDatabase();
-        view.hideSaveAndCancel();
         toastTimeStampSave();
+        view.hideSaveAndCancel();
     }
 
     public void onCancelCounter(){
         setBooleanInit(false);
-        view.hideSaveAndCancel();
         toastTimeStampCancel();
+        view.hideSaveAndCancel();
     }
 
     public void onStart(){
         super.onStart();
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
+    }
+
+    public void onStop(){
+        super.onStop();
     }
 
     @Override public int getCounterType() {

@@ -58,7 +58,9 @@ public class DataFragment extends Fragment implements LoaderManager.LoaderCallba
                 Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
                 if (cursor != null) {
                     ((Callback) getActivity())
-                            .onItemSelected(CountersContract.CountersEntry.buildCountersEntryWithId(cursor.getInt(COLUMN_COUNTER_ID)));
+                        .onItemSelected(
+                            CountersContract.CountersEntry.buildCountersEntryWithId(
+                                cursor.getInt(COLUMN_COUNTER_ID)));
                 }
                 listViewPosition = position;
             }

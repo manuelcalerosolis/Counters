@@ -16,6 +16,10 @@ public class UtilToast {
         getToastLongCenter(message).show();
     }
 
+    public static void showLongCenterMessage(int message) {
+        getToastLongCenter(MainActivity.getAppContext().getString(message)).show();
+    }
+
     public static void showShortMessage(String message, Context context) {
         getToast(message, Toast.LENGTH_SHORT).show();
     }

@@ -3,6 +3,9 @@ package com.example.calero.counters.app.UI.Presenters;
 import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.UI.Fragments.Counters.TimeCounterFragment;
+import com.example.calero.counters.app.Utils.UtilToast;
+
+import java.util.Date;
 
 // TODO No se imprime bien el tiempo cdo se voltea el dispositivo
 
@@ -23,8 +26,7 @@ public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
             view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
         }
         else
-            MainActivity.showAppToast(R.string.start_time_please);
-
+            UtilToast.showLongCenterMessage(R.string.start_time_please);
     }
 
     public void onClickButtonMinus(){
@@ -37,6 +39,37 @@ public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
         return 1;
     }
 
+    public void onClickButtonPlay() {
+        setBooleanInit(true);
+
+        view.startCounter();
+
+        getModelCounter().setTimeStampStart(new Date());
+        getModelCounter().setLocationLatitude(MainActivity.getLocationLatitude());
+        getModelCounter().setLocationLongitude(MainActivity.getLocationLongitude());
+
+        toastTimeStampStart();
+    }
+
+    public void onClickButtonPause() {
+        toggleBooleanInit();
+        if (isBooleanInit())
+            view.startCounter();
+        else
+            view.pauseCounter();
+    }
+
+    public void onClickButtonStop() {
+        setBooleanInit(false);
+
+        resetCounter();
+
+        view.stopCounter();
+        view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
+
+        toastTimeStampCancel();
+    }
+
     public void onStart(){
         super.onStart();
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
@@ -44,11 +77,17 @@ public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
 
     public void saveCounter() {
         if (isBooleanInit()) {
+            getModelCounter().setTimeStampStop(new Date());
             getModelCounter().insertDatabase();
+            setBooleanInit(false);
         }
+
         resetCounter();
-        toastTimeStampSave();
+
+        view.stopCounter();
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
+
+        toastTimeStampSave();
     }
 
     @Override
@@ -58,8 +97,13 @@ public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
 
     public interface View {
 
-        void refreshTextViewCounter(String stringCounterFormat);
+        void startCounter();
 
+        void pauseCounter();
+
+        void stopCounter();
+
+        void refreshTextViewCounter(String stringCounterFormat);
     }
 
 }

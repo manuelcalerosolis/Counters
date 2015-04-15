@@ -34,7 +34,8 @@ public class UtilDate {
         int minutesDifference;
         Date dateStart = getDateFromString(timeStampTextStart);
         Date dateStop = getDateFromString(timeStampTextEnd);
-        minutesDifference = (int) (TimeUnit.MILLISECONDS.toMinutes(dateStart.getTime())) - (int) (TimeUnit.MILLISECONDS.toMinutes(dateStop.getTime()));
+        minutesDifference = (int) (TimeUnit.MILLISECONDS.toMinutes(dateStop.getTime()));
+        minutesDifference -= (int) (TimeUnit.MILLISECONDS.toMinutes(dateStart.getTime()));
         return ( minutesDifference );
     }
 
@@ -68,7 +69,6 @@ public class UtilDate {
             android.text.format.DateFormat.format("hh:mm:ss", dateEnd);
         return (dateString);
     }
-
 
     public static String getTimeStampFromString(String timeStampText) throws ParseException {
         Date date = new Date();

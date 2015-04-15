@@ -29,7 +29,7 @@ public class DetailActivity extends ActionBarActivity {
             fragment.setArguments(arguments);
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.counter_detail_container, fragment)
+                .add(R.id.counter_detail_container, fragment)
                     .commit();
         }
     }

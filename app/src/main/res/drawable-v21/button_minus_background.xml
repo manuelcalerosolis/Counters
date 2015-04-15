@@ -4,7 +4,7 @@
         android:color="@color/primary_blue">
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/primary_pink"/>
+            <solid android:color="@color/background_button_minus"/>
         </shape>
     </item>
 </ripple>

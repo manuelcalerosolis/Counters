@@ -13,6 +13,15 @@
     <color name="article_title">#3399FF</color>
     <color name="cachecolor">#8ad0e8</color>
     <color name="background_app">#FCE9AF</color>
-    <!--<color name="background_button_plus">#92D4CA</color>-->
-    <color name="background_button_plus">#659700</color>
+
+    <color name="primary">#00BCD4</color>
+    <color name="primary_dark">#0097A7</color>
+    <color name="accent">#659700</color>
+    <color name="accent_translucent">#659700</color>
+    <color name="accent_bright">#659700</color>
+    <color name="primary_blue">#2196F3</color>
+    <color name="background_button_plus">#2E7D32</color>
+    <color name="background_button_minus">#D84315</color>
+    <color name="primary_pink_bright">#D81B60</color>
+
 </resources>

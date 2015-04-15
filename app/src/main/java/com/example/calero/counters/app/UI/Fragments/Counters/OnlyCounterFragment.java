@@ -22,19 +22,13 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
 
     static OnlyCounterPresenter onlyCounterPresenter = new OnlyCounterPresenter();
 
-    private Bundle savedInstanceState;
-
     public static OnlyCounterFragment newInstance() {
-        Log.d(LOG_TAG, "newInstance");
-
         OnlyCounterFragment fragmentOnlyCounter = new OnlyCounterFragment();
         return fragmentOnlyCounter;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "onCreate");
-
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
@@ -46,6 +40,19 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
         onlyCounterPresenter.onStart();
     }
 
+    @Override
+    public void onResume(){
+        Log.d(LOG_TAG, "onResume");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause(){
+        Log.d(LOG_TAG, "onPause");
+        super.onPause();
+    }
+
+    @Override
     public void onStop(){
         Log.d(LOG_TAG, "onStop");
         super.onStop();
@@ -54,7 +61,6 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "onCreateView");
 
         super.onCreateView(inflater, container, savedInstanceState);
 
@@ -68,7 +74,7 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
         imageButtonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            onlyCounterPresenter.onClickButtonPlus();
+                onlyCounterPresenter.onClickButtonPlus();
             }
         });
 
@@ -98,14 +104,11 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "onSaveInstanceState()");
         savedInstanceState = onlyCounterPresenter.getSavedIntance();
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "onRestoreInstanceState()");
         if (savedInstanceState != null) {
-            Log.d(LOG_TAG, "onRestoreInstanceState() and != null");
             onlyCounterPresenter.setSavedInstance(savedInstanceState);
         }
     }

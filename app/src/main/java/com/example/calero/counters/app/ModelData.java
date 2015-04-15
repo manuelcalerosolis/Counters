@@ -15,7 +15,7 @@ public class ModelData {
         R.drawable.fragment_counter_only,
         R.drawable.fragment_counter_time,
         R.drawable.fragment_counter_set};
-    private long Duration;
+    private long duration;
     private Date timeStampInit;
     private Date TimeStampEnd;
     private String rowDetails;
@@ -97,11 +97,11 @@ public class ModelData {
     }
 
     public long getDuration() {
-        return Duration;
+        return duration;
     }
 
     public String getDurationString() {
-        return Long.toString(Duration);
+        return Long.toString(duration);
     }
 
     public void setRowDetails(String rowDetails) {
@@ -126,7 +126,7 @@ public class ModelData {
     }
 
     public void setDuration(long duration) {
-        Duration = duration;
+        this.duration = duration;
     }
 
 }

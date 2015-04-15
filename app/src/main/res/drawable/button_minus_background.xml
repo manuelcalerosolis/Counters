@@ -4,13 +4,13 @@
     <item android:state_pressed="true">
         <shape
             android:shape="oval">
-            <solid android:color="@color/primary_pink_bright"/>
+            <solid android:color="@color/background_button_minus"/>
         </shape>
     </item>
     <item>
         <shape
             android:shape="oval">
-            <solid android:color="@color/primary_pink"/>
+            <solid android:color="@color/background_button_minus"/>
         </shape>
     </item>
 </selector>

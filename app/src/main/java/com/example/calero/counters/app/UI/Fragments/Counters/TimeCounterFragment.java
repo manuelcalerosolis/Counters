@@ -30,12 +30,10 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
     ImageButton imageButtonPlayTime;
     ImageButton imageButtonStopTime;
 
-    LinearLayout linearLayoutStop;
-
     CounterTimer counterTimer;
 
-    long longHours      = 0;
-    long longMinutes    = 1;
+    long longHours = 0;
+    long longMinutes = 1;
 
     static TimeCounterPresenter timeCounterPresenter = new TimeCounterPresenter();
 
@@ -64,20 +62,17 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
         imageButtonPlayTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeCounterPresenter.toggleBooleanInit();
-                if (timeCounterPresenter.isBooleanInit())
-                    startCounter();
+                if(counterTimer==null)
+                    timeCounterPresenter.onClickButtonPlay();
                 else
-                    pauseCounter();
+                    timeCounterPresenter.onClickButtonPause();
             }
         });
 
         imageButtonStopTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopCounter();
-                finishCounterTimer();
-                refreshTextViewTimer();
+                timeCounterPresenter.onClickButtonStop();
             }
         });
 
@@ -126,6 +121,10 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
         return view;
     }
 
+    protected void finishCounterTimer(){
+        timeCounterPresenter.saveCounter();
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -135,12 +134,33 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
     @Override
     public void onStart(){
         Log.d(LOG_TAG, "onStart");
+        Log.d(LOG_TAG, "state booleanInit onStart" + timeCounterPresenter.isBooleanInit());
+
         super.onStart();
         timeCounterPresenter.onStart();
+
+        if (timeCounterPresenter.isBooleanInit())
+            hidePlusMinusButtons();
+        else
+            showPlusMinusButtons();
     }
 
-    public void onStop(){
+    @Override
+    public void onResume(){
+        Log.d(LOG_TAG, "onResume");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause(){
+        Log.d(LOG_TAG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
         Log.d(LOG_TAG, "onStop");
+        Log.d(LOG_TAG, "state booleanInit onStop" + timeCounterPresenter.isBooleanInit());
         super.onStop();
         timeCounterPresenter.onStop();
     }
@@ -155,28 +175,39 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
         textViewCounter.setText(stringCounterFormat);
     }
 
-    private void startCounter(){
+    public void startCounter(){
         if (counterTimer==null)
             buildCounterTimer();
         else
             leftCounterTimer();
         counterTimer.start();
 
+        hidePlusMinusButtons();
+    }
+
+    private void hidePlusMinusButtons(){
         imageButtonPlayTime.setImageResource(R.drawable.pause_time_icon);
         imageButtonPlusTime.setVisibility(View.INVISIBLE);
         imageButtonMinusTime.setVisibility(View.INVISIBLE);
     }
 
-    private void pauseCounter(){
+    public void pauseCounter(){
         if (counterTimer!=null)
             counterTimer.cancel();
         imageButtonPlayTime.setImageResource(R.drawable.play_time_icon);
     }
 
-    private void stopCounter(){
+    public void stopCounter(){
         if (counterTimer!=null)
             counterTimer.cancel();
-        MainActivity.showAppToast(R.string.stop_time);
+        counterTimer = null;
+
+        showPlusMinusButtons();
+
+        refreshTextViewTimer();
+    }
+
+    private void showPlusMinusButtons(){
         imageButtonPlayTime.setImageResource(R.drawable.play_time_icon);
         imageButtonPlusTime.setVisibility(View.VISIBLE);
         imageButtonMinusTime.setVisibility(View.VISIBLE);
@@ -195,14 +226,6 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
     protected void leftCounterTimer(){
         long millisLeft = counterTimer.longMillisLeft;
         counterTimer    = new CounterTimer(millisLeft, 1000);
-    }
-
-    protected void finishCounterTimer(){
-        timeCounterPresenter.saveCounter();
-        if(counterTimer != null){
-            counterTimer.cancel();
-            counterTimer = null;
-        }
     }
 
     /*
@@ -239,15 +262,6 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
         public void onFinish() {
             finishCounterTimer();
         }
-
-        public void toggle() {
-            if (timeCounterPresenter.isBooleanInit())
-                this.cancel();
-            else
-                this.start();
-            timeCounterPresenter.toggleBooleanInit();
-        }
-
     }
 
 }
