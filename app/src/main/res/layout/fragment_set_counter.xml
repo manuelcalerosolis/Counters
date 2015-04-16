@@ -4,13 +4,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/backgroundImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="false"
-        android:scaleType="centerCrop"
-        android:src="@drawable/set_background" />
+    <!--<ImageView-->
+        <!--android:id="@+id/backgroundImage"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentTop="false"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--android:src="@drawable/set_background" />-->
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,7 +27,8 @@
             android:id="@+id/linearLayoutSet"
             android:background="#c8292929"
             android:gravity="center_horizontal"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:padding="3dip">
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -50,6 +51,7 @@
                 android:layout_gravity="center"
                 android:paddingLeft="20sp"
                 android:paddingRight="20sp"
+                android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"/>
 
             <TextView
@@ -64,6 +66,7 @@
                 android:gravity="right"
                 android:paddingRight="20sp"
                 android:paddingLeft="20sp"
+                android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"/>
 
             <ImageButton
@@ -75,7 +78,7 @@
                 android:focusableInTouchMode="false"
                 android:layout_gravity="center_horizontal"
                 android:padding="5dp"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
 
         </LinearLayout>

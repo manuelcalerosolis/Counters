@@ -43,7 +43,8 @@ public class UtilDate {
         long secondsDifference;
         Date dateStart = getDateFromString(timeStampTextStart);
         Date dateStop = getDateFromString(timeStampTextEnd);
-        secondsDifference = (TimeUnit.MILLISECONDS.toSeconds(dateStart.getTime())) - (TimeUnit.MILLISECONDS.toSeconds(dateStop.getTime()));
+        secondsDifference = (TimeUnit.MILLISECONDS.toSeconds(dateStop.getTime()));
+        secondsDifference -= (TimeUnit.MILLISECONDS.toSeconds(dateStart.getTime()));
         secondsDifference = secondsDifference % 60;
         return ( secondsDifference );
     }

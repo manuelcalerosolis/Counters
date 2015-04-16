@@ -21,7 +21,6 @@ public abstract class BaseFragmentCounter extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        imageViewBackground = (ImageView) view.findViewById(R.id.backgroundImage);
         textViewCounter = (TextView) view.findViewById(R.id.list_item_counter_textview);
         imageButtonPlus = (ImageButton) view.findViewById(R.id.imageButtonPlus);
         imageButtonMinus = (ImageButton) view.findViewById(R.id.imageButtonMinus);

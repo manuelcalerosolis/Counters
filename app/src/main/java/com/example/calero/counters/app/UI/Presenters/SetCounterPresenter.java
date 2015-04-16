@@ -1,5 +1,7 @@
 package com.example.calero.counters.app.UI.Presenters;
 
+import com.example.calero.counters.app.UI.Activities.MainActivity;
+
 import java.util.Date;
 
 // TODO vuelta a origen tras finalizar el conteo
@@ -38,6 +40,8 @@ public class SetCounterPresenter extends PrensenterBasePresenterCounter {
     public void startCounter(){
         setBooleanInit(true);
         getModelCounter().setTimeStampStart(new Date());
+        getModelCounter().setLocationLatitude(MainActivity.getLocationLatitude());
+        getModelCounter().setLocationLongitude(MainActivity.getLocationLongitude());
         toastTimeStampStart();
         view.setButtonsVisible();
     }
@@ -47,22 +51,30 @@ public class SetCounterPresenter extends PrensenterBasePresenterCounter {
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
 
-    public void setTotalCounter(){
+    public void onClickTextTotal(){
         view.getNumberDialogFragment();
     }
 
-    public void onCancelCounter(){
+    public void onClickButtonCounter(){
         setBooleanInit(false);
         view.setButtonsInvisible();
         toastTimeStampCancel();
         resetCounter();
     }
 
-    public void onSaveCounter(){
+    public void onClickButtonSave(){
+        if (isBooleanInit())
+            saveCounter();
+        else
+            onClickTextTotal();
+    }
+
+    public void saveCounter(){
         setBooleanInit(false);
+        getModelCounter().setTimeStampStop(new Date());
         getModelCounter().insertDatabase();
-        view.setButtonsInvisible();
         toastTimeStampSave();
+        view.setButtonsInvisible();
         resetCounter();
     }
 

@@ -46,33 +46,35 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
         super.onCreateView(inflater, container, savedInstanceState);
 
         imageButtonCancel = (ImageButton) view.findViewById(R.id.imageButtonCancel);
+        imageButtonSave = (ImageButton) view.findViewById(R.id.imageButtonSave);
+        textViewTotal = (TextView) view.findViewById(R.id.textViewTotal);
+        textViewSet = (TextView) view.findViewById(R.id.textViewSet);
+
         imageButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                prensenterSetCounter.onCancelCounter();
+                prensenterSetCounter.onClickButtonCounter();
             }
         });
 
-        imageButtonSave = (ImageButton) view.findViewById(R.id.imageButtonSave);
         imageButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                prensenterSetCounter.onSaveCounter();
-            }
-        });
-        textViewTotal = (TextView) view.findViewById(R.id.textViewTotal);
-        textViewTotal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                prensenterSetCounter.setTotalCounter();
+                prensenterSetCounter.onClickButtonSave();
             }
         });
 
-        textViewSet = (TextView) view.findViewById(R.id.textViewSet);
+        textViewTotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prensenterSetCounter.onClickTextTotal();
+            }
+        });
+
         textViewSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                prensenterSetCounter.setTotalCounter();
+                prensenterSetCounter.onClickTextTotal();
             }
         });
 
@@ -106,8 +108,15 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
 
     @Override
     public void onStart(){
+
         super.onStart();
         prensenterSetCounter.onStart();
+
+        if (prensenterSetCounter.isBooleanInit())
+            setButtonsVisible();
+        else
+            setButtonsInvisible();
+
     }
 
     public void onStop(){
@@ -126,7 +135,7 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
 
     public void setButtonsInvisible(){
         imageButtonCancel.setVisibility(android.view.View.INVISIBLE);
-        imageButtonSave.setVisibility(android.view.View.INVISIBLE);
+        imageButtonSave.setVisibility(android.view.View.VISIBLE);
     }
 
     public void getNumberDialogFragment(){
