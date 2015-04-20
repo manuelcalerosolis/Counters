@@ -65,13 +65,21 @@ public class UtilApplication {
     }
 
     public static void plusSound(){
-    Log.d(LOG_TAG, "Call to plusSound()");
+        playSound( R.raw.incoming );
+    }
+
+    public static void minusSound(){
+        playSound( R.raw.outgoing );
+    }
+
+    public static void playSound(int resourceFile ){
+    Log.d(LOG_TAG, "Call to playSound()");
 
     final AudioManager audioManager = (AudioManager) MainActivity.getAppContext().getSystemService(Context.AUDIO_SERVICE);
     final int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
 
-    MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.getAppContext(), R.raw.incoming);
+    MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.getAppContext(), resourceFile );
 
     mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
         @Override

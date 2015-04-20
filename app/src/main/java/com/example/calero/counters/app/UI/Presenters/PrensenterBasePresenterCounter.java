@@ -56,6 +56,8 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
     }
 
     public void minusCounter(){
+        if(UtilApplication.isSound())
+            UtilApplication.minusSound();
         modelCounter.minusLongCounter();
     }
 
