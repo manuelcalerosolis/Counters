@@ -31,25 +31,31 @@
     <string name="data_tab">Datos</string>
     <string name="minus_counter">MENOS</string>
     <string name="plus_counter">MAS</string>
-    <string name="textView">textView</string>
+    <!--<string name="textView">textView</string>-->
     <string name="duration_counter">Duración</string>
     <string name="fragment_counter_set">Contador objetivo</string>
     <string name="fragment_counter_data">Datos</string>
     <string name="title_activity_detail">Conteo detalle</string>
     <string name="action_share">Compartir</string>
-    <string name="preference_minutes_label">minutes</string>
+    <string name="preference_minutes_label">Minutos</string>
     <string name="today">hoy</string>
     <string name="tomorrow">mañana</string>
-    <string name="tv_label">insert top number</string>
+    <string name="tv_label">Inserte el número objetivo</string>
     <string name="dialog_text">Contador objetivo</string>
     <string name="action_settings">Configuración</string>
-    <string name="dialog_ok">aceptar</string>
-    <string name="dialog_cancel">cancelar</string>
+    <string name="dialog_ok">Aceptar</string>
+    <string name="dialog_cancel">Cancelar</string>
     <string name="minutes">min</string>
     <string name="seconds">seg</string>
 
     <string name="format_latitude">Latitud : <xliff:g id="latitude">%1$.6f</xliff:g>º</string>
     <string name="format_longitude">Longitud : <xliff:g id="longitude">%1$.6f</xliff:g>º</string>
     <string name="to"> hasta </string>
+    <string name="title_activity_settings">Configuración</string>
+
+    <string name="preference_sound_label">Sonidos</string>
+    <string name="preference_sound_activated">Sonido activado</string>
+
+    <string name="menu_settings">Configuración</string>
 
 </resources>

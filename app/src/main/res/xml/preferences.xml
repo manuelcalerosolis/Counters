@@ -11,17 +11,17 @@
         android:singleLine="true" />
 
     <!--<ListPreference-->
-        <!--android:title="@string/pref_units_label"-->
-        <!--android:key="@string/pref_units_key"-->
-        <!--android:defaultValue="@string/pref_units_metric"-->
-        <!--android:entryValues="@array/pref_units_values"-->
-        <!--android:entries="@array/pref_units_options" />-->
+        <!--android:title="@string/pref_sound_label"-->
+        <!--android:key="@string/pref_sound_key"-->
+        <!--android:defaultValue="@string/pref_sound_activated"-->
+        <!--android:entryValues="@array/pref_sound_values"-->
+        <!--android:entries="@array/pref_sound_options" />-->
 
-    <!--<CheckBoxPreference-->
-        <!--android:title="@string/pref_enable_notifications_label"-->
-        <!--android:key="@string/pref_enable_notifications_key"-->
-        <!--android:summaryOff="@string/pref_enable_notifications_false"-->
-        <!--android:summaryOn="@string/pref_enable_notifications_true"-->
-        <!--android:defaultValue="@string/pref_enable_notifications_default" />-->
+    <CheckBoxPreference
+        android:title="@string/preference_sound_label"
+        android:key="@string/preference_sound_key"
+        android:summaryOff="@string/preference_enable_sound_false"
+        android:summaryOn="@string/preference_enable_sound_true"
+        android:defaultValue="@string/preference_enable_sound_default" />
 
 </PreferenceScreen>

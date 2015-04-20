@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pref_sound_options">
+        <item>@string/preference_sound_label_activated</item>
+        <item>@string/preference_sound_label_deactivated</item>
+    </string-array>
+
+    <string-array name="pref_sound_values">
+        <item>@string/preference_sound_activated</item>
+        <item>@string/preference_sound_deactivated</item>
+    </string-array>
+
+</resources>

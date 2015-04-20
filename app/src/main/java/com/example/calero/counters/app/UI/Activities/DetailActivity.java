@@ -9,10 +9,6 @@ import android.view.MenuItem;
 import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.UI.Fragments.DetailFragment;
 
-/**
- * Created by calero on 22/03/2015.
- */
-
 public class DetailActivity extends ActionBarActivity {
 
     @Override
@@ -28,29 +24,28 @@ public class DetailActivity extends ActionBarActivity {
             DetailFragment fragment = new DetailFragment();
             fragment.setArguments(arguments);
 
-            getSupportFragmentManager().beginTransaction()
-                .add(R.id.counter_detail_container, fragment)
-                    .commit();
+            getSupportFragmentManager()
+                .beginTransaction()
+                    .add(R.id.counter_detail_container, fragment)
+                        .commit();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detail, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

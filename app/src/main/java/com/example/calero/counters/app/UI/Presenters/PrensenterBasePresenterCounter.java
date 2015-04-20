@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.Models.ModelCounter;
 import com.example.calero.counters.app.R;
+import com.example.calero.counters.app.Utils.UtilApplication;
 import com.example.calero.counters.app.Utils.UtilToast;
 
 public abstract class PrensenterBasePresenterCounter extends BasePresenter {
@@ -45,6 +46,8 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
     }
 
     public void plusCounter(){
+        if(UtilApplication.isSound())
+            UtilApplication.plusSound();
         modelCounter.plusLongCounter();
     }
 
