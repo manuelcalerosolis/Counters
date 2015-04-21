@@ -10,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.UI.Presenters.TimeCounterPresenter;
 
@@ -107,14 +105,14 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
         imageButtonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeCounterPresenter.onClickButtonPlus();
+                timeCounterPresenter.onClickButtonPlus(getActivity().getApplication());
             }
         });
 
         imageButtonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeCounterPresenter.onClickButtonMinus();
+                timeCounterPresenter.onClickButtonMinus(getActivity().getApplication());
             }
         });
 

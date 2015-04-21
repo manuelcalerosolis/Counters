@@ -74,14 +74,14 @@ public class OnlyCounterFragment extends BaseFragmentCounter implements OnlyCoun
         imageButtonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onlyCounterPresenter.onClickButtonPlus();
+                onlyCounterPresenter.onClickButtonPlus(getActivity().getApplication());
             }
         });
 
         imageButtonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            onlyCounterPresenter.onClickButtonMinus();
+            onlyCounterPresenter.onClickButtonMinus(getActivity().getApplication());
             }
         });
 
