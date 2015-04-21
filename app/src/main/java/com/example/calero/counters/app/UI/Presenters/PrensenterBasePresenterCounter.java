@@ -46,7 +46,7 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
     }
 
     public void plusCounter(){
-        if(UtilApplication.isSound())
+        if(true)
             UtilApplication.plusSound();
         modelCounter.plusLongCounter();
     }
