@@ -3,16 +3,28 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarTabStyle">@style/ActionBarTabStyle</item>
-        <item name="actionBarSize">280dip</item>
+        <item name="actionBarSize">60dip</item>
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryDark">@color/blueback</item>
     </style>
 
-    <style name="ActionBarTabStyle" parent="@style/Widget.AppCompat.ActionBar.TabView">
-        <item name="android:minHeight">280dip</item>
+    <style name="CountersTheme" parent="AppTheme">
+        <item name="actionBarStyle">@style/ActionBar.Solid.Counters</item>
     </style>
 
+    <!-- Settings activity theme. -->
     <style name="SettingsTheme" parent="AppTheme">
+    </style>
+
+    <!-- main activity action bar styles -->
+    <style name="ActionBar.Solid.Counters" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="displayOptions">useLogo|showHome|showTitle</item>
+        <item name="logo">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="ActionBarTabStyle" parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <item name="displayOptions">useLogo|showHome</item>
+        <item name="logo">@drawable/ic_launcher</item>
     </style>
 
     <style name="ButtonPlusStyle">

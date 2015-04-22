@@ -1,5 +1,7 @@
 package com.example.calero.counters.app.UI.Presenters;
 
+import android.app.Application;
+
 import com.example.calero.counters.app.UI.Activities.MainActivity;
 
 import java.util.Date;
@@ -15,16 +17,16 @@ public class OnlyCounterPresenter extends PrensenterBasePresenterCounter {
         this.view = view;
     }
 
-    public void onClickButtonPlus(){
+    public void onClickButtonPlus(final Application application){
         if (!isBooleanInit())
             startCounter();
-        plusCounter();
+        plusCounter(application);
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
 
-    public void onClickButtonMinus(){
+    public void onClickButtonMinus(final Application application){
         if (isBooleanInit())
-            minusCounter();
+            minusCounter(application);
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
 

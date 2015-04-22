@@ -107,14 +107,14 @@ public class TimeCounterFragment extends BaseFragmentCounter implements TimeCoun
         imageButtonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeCounterPresenter.onClickButtonPlus();
+                timeCounterPresenter.onClickButtonPlus(getActivity().getApplication());
             }
         });
 
         imageButtonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeCounterPresenter.onClickButtonMinus();
+                timeCounterPresenter.onClickButtonMinus(getActivity().getApplication());
             }
         });
 

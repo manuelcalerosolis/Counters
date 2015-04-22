@@ -81,14 +81,14 @@ public class SetCounterFragment extends BaseFragmentCounter implements SetCounte
         imageButtonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prensenterSetCounter.onClickButtonPlus();
+                prensenterSetCounter.onClickButtonPlus(getActivity().getApplication());
             }
         });
 
         imageButtonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prensenterSetCounter.onClickButtonMinus();
+                prensenterSetCounter.onClickButtonMinus(getActivity().getApplication());
             }
         });
 
