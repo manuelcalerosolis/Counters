@@ -159,7 +159,7 @@ public class MainActivity extends ActionBarActivity implements DataFragment.Call
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            startActivity(new Intent(this, SettingsActivity.class));
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             return true;
         }
 
@@ -168,7 +168,7 @@ public class MainActivity extends ActionBarActivity implements DataFragment.Call
 
     @Override
     public void onItemSelected(Uri contentUri) {
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent( MainActivity.this, DetailActivity.class);
             intent.setData(contentUri);
             startActivity(intent);
     }
