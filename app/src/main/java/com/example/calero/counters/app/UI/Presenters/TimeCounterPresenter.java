@@ -1,7 +1,5 @@
 package com.example.calero.counters.app.UI.Presenters;
 
-import android.app.Application;
-
 import com.example.calero.counters.app.R;
 import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.UI.Fragments.Counters.TimeCounterFragment;
@@ -22,18 +20,18 @@ public class TimeCounterPresenter extends PrensenterBasePresenterCounter {
         this.view = view;
     }
 
-    public void onClickButtonPlus(final Application application){
+    public void onClickButtonPlus(){
         if (isBooleanInit()){
-            plusCounter(application);
+            plusCounter();
             view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
         }
         else
             UtilToast.showLongCenterMessage(R.string.start_time_please);
     }
 
-    public void onClickButtonMinus(final Application application){
+    public void onClickButtonMinus(){
         if (isBooleanInit())
-            minusCounter(application);
+            minusCounter();
             view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
 

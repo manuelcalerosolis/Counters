@@ -1,10 +1,8 @@
 package com.example.calero.counters.app.UI.Presenters;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.calero.counters.app.CountersApplication;
 import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.Models.ModelCounter;
 import com.example.calero.counters.app.R;
@@ -47,20 +45,20 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
         UtilToast.showLongCenterMessage(MainActivity.getAppContext().getString(R.string.counter_cancel));
     }
 
-    public void plusCounter(final Application application){
-        if(UtilApplication.isSound())
-            ((CountersApplication) application).playIncoming();
+    public void plusCounter(){
+        if(true)
+            UtilApplication.plusSound();
         modelCounter.plusLongCounter();
-    }
-
-    public void minusCounter(final Application application){
-        if(UtilApplication.isSound())
-            ((CountersApplication) application).playOutgoing();
-        modelCounter.minusLongCounter();
     }
 
     public long getCounter(){
         return modelCounter.getLongCounter();
+    }
+
+    public void minusCounter(){
+        if(UtilApplication.isSound())
+            UtilApplication.minusSound();
+        modelCounter.minusLongCounter();
     }
 
     public void resetCounter(){
