@@ -28,14 +28,14 @@ public class SetCounterPresenter extends PrensenterBasePresenterCounter {
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
     }
 
-    private boolean isPlusCounter() {
-        return (getCounter() < view.getTextTotal());
-    }
-
     public void onClickButtonMinus(final Application application){
         if (isBooleanInit())
             minusCounter(application);
         view.refreshTextViewCounter(getModelCounter().getStringCounterFormat());
+    }
+
+    private boolean isPlusCounter() {
+        return (getCounter() < view.getTextTotal());
     }
 
     public void startCounter(){

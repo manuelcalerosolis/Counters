@@ -4,7 +4,7 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.calero.counters.app.TuApplication;
+import com.example.calero.counters.app.CountersApplication;
 import com.example.calero.counters.app.UI.Activities.MainActivity;
 import com.example.calero.counters.app.Models.ModelCounter;
 import com.example.calero.counters.app.R;
@@ -48,19 +48,19 @@ public abstract class PrensenterBasePresenterCounter extends BasePresenter {
     }
 
     public void plusCounter(final Application application){
-        if(true)
-            ((TuApplication) application).playIncoming();
+        if(UtilApplication.isSound())
+            ((CountersApplication) application).playIncoming();
         modelCounter.plusLongCounter();
+    }
+
+    public void minusCounter(final Application application){
+        if(UtilApplication.isSound())
+            ((CountersApplication) application).playOutgoing();
+        modelCounter.minusLongCounter();
     }
 
     public long getCounter(){
         return modelCounter.getLongCounter();
-    }
-
-    public void minusCounter(final Application application){
-        if(true)
-            ((TuApplication) application).playOutgoing();
-        modelCounter.minusLongCounter();
     }
 
     public void resetCounter(){
